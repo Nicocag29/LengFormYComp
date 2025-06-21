@@ -1,0 +1,32 @@
+.DS_Store
+
+# Ignore LaTeX auxiliary files
+*.aux
+*.log
+*.toc
+*.out
+*.lof
+*.lot
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.bbl
+*.blg
+*.nav
+*.snm
+
+# Ignore generated PDFs (optional — keep if you don't want to track them)
+# *.pdf
+
+# Ignore temp/backup files
+*~
+*.bak
+*.tmp
+*.sav
+
+# Ignore VS Code settings (optional)
+.vscode/
+
+# Ignore LaTeX build directories (if using latexmk or similar)
+_build/
+output/
