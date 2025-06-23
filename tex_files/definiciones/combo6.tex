@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 6 }
 
@@ -11,7 +11,38 @@
 \maketitle
 
 Defina cuando un conjunto $S \subseteq \omega^n \times \Sigma^{*m}$
-es llamado $\Sigma$-efectivamente enumera y defina: "el procedimiento
+es llamado $\Sigma$-efectivamente enumerable y defina: "el procedimiento
 efectivo $\mathbb{P}$ enumera a $S$"
+
+\(\)
+\begin{center}
+    Respuesta: 
+    \(\)
+\end{center}
+
+Un conjunto $S \subseteq \omega^n \times \Sigma^{*m}$
+es llamado $\Sigma$-efectivamente enumerable cuando sea vacío
+o haya una función $F : \omega \rightarrow \omega^n \times \Sigma^{*m}$ 
+tal que $I_f = S$ y $F_{(i)}$ sea $\Sigma$-efectivamente computable
+para cada $i \in \{1, \dots, n + m\}$\\
+
+Diremos que "el procedimiento efectivo $\mathbb{P}$ enumera a $S$"
+cuando un procedimiento efectivo $\mathbb{P}$ cumpla:
+\begin{align*}
+        &\text{(1) El conjunto de datos de entrada de } \mathbb{P}
+        \text{ es } \omega\\
+        &\text{(2) } \mathbb{P} \text{ se detiene para cada } x \in S\\
+        &\text{(3) El conjunto de datos de salida de } \mathbb{P}
+        \text{ es igual a } S. \text{ Es decir, siempre que } \mathbb{P}
+        \text{ se detiene, }\\
+        &\text{da como salida un elemento de } S
+        \text{, y para cada elemento} 
+        (\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})
+        \in S \text{, hay un }\\
+        &x \in \omega \text{ tal que } \mathbb{P}
+        \text{ da como salida a } 
+        (\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha}) 
+        \text{ cuando lo corremos con } x \text{ como dato de entrada }
+\end{align*}
 
 \end{document} 
