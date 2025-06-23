@@ -1,5 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 8 }
 
@@ -19,6 +20,47 @@ Defina:
     \item Conjunto rectangular
     
     \item "$S$ es un conjunto de tipo $(n, m)$"
+\end{enumerate}
+
+\(\)
+\begin{center}
+    Respuestas: 
+    \(\)
+\end{center}
+
+\begin{enumerate}
+    \item Sea $\Sigma$ un alfabeto finito y sea $P : D_P 
+    \subseteq \omega \times \omega^{n} \times \Sigma^{*m}$ un predicado.
+    Dado $(\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})
+    \in \omega^n \times \Sigma^{*m}$, cuando exista al menos un $t \in \omega$ tal que
+    $P(t, \overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha}) = 1$, 
+    usaremos $min_t P(t, \overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})$ para
+    denotar al menor de tales $t's$. Definimos:
+    \begin{center}
+        $M(P) = \lambda\overset{\rightarrow}{x} \overset{\rightarrow}{\alpha}
+        [min_t P(t, \overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})]$
+    \end{center}
+
+    \item $Lt : \mathbf{N} \rightarrow \omega$
+    \begin{center}
+        \[
+            Lt(x) =
+            \begin{cases}
+            \max_i (x)_i \neq 0 & \text{si } x \neq 1 \\
+            0 & \text{si } x = 1
+            \end{cases}
+        \]
+    \end{center}
+
+    \item Sea $\Sigma$ un alfabeto finito. Un conjunto $\Sigma$-mixto $S$ es llamado
+    $rectangular$ si es de la forma 
+    \begin{center}
+        $S_1 \times \dots \times S_n \times L_1 \times \dots \times L_m$
+    \end{center}
+    con cada $S_i \subseteq \omega$ y cada $L_i \subseteq \Sigma^{*}$
+
+    \item $n, m \in \omega$ son tales que 
+    $S \subseteq \omega^n \times \Sigma^{*m}$
 \end{enumerate}
 
 \end{document} 
