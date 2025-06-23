@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 4 }
 
@@ -14,5 +14,29 @@ Defina cuando una función $f : D_f \subseteq \omega^n \times \Sigma^{*m}
 \rightarrow \omega$
 es llamada $\Sigma$-efectivamente computable y defina: "el procedimiento
 efectivo $\mathbb{P}$ computa a la función $f$"
+
+\(\)
+\begin{center}
+    Respuesta: 
+    \(\)
+\end{center}
+
+Una función $\Sigma \text{-mixta } f : D_f \subseteq \omega^n \times \Sigma^{*m} 
+\rightarrow \omega$ es llamada $\Sigma-efectivamente \text{ } computable$
+cuando hay un procedimiento efectivo $\mathbb{P}$ que la computa. Esto es:
+\begin{align*}
+        &\text{(1) El conjunto de datos de entrada de } \mathbb{P}
+        \text{ es } \omega^n \times \Sigma^{*m}\\
+        &\text{(2) El conjunto de datos de salida está contenido en } \Sigma^{*}\\
+        &\text{(3) Si } (\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})
+        \in D_f \text{, entonces } \mathbb{P} \text{ se detiene partiendo de }
+        (\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha}) \text{,
+         dando como dato de salida } f(\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})\\
+        &\text{(4) Si } (\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})
+        \in (\omega^n \times \Sigma^{*m}) - D_f \text{, entonces
+         } \mathbb{P} \text{ no se detiene partiendo de } 
+        (\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})
+\end{align*}
+
 
 \end{document} 
