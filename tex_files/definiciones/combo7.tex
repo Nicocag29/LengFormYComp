@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 7 }
 
@@ -14,5 +14,39 @@ Defina cuando una función $f : D_f \subseteq \omega^n \times \Sigma^{*m}
 \rightarrow \omega$
 es llamada $\Sigma$-Turing computable y defina: "la máquina de Turing $M$
 computa a la función $f$"
+
+\(\)
+\begin{center}
+    Respuesta: 
+    \(\)
+\end{center}
+
+Diremos que una función $f : D_f \subseteq \omega^n \times 
+\Sigma^{*m} \rightarrow \omega$
+es llamada $\Sigma$-Turing computable si existe una máquina de 
+Turing con unit, $M = \{1, \Sigma, \Gamma, \delta, q_0, B, |, F\}$
+que la compute, esto es:
+
+\begin{enumerate}
+        \item Si $
+        (\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})
+        \in D_f$, entonces hay un $p \in Q$ tal que 
+        \begin{center}
+                $\lfloor q_0 B |^{x_1} B \dots B |^{x_n} B \alpha_1
+                B \dots B \alpha_m \rfloor \overset{*}{\vdash} 
+                \lfloor p B |^{f(\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})}
+                \rfloor$
+        \end{center}
+        y $\lfloor p B |^{f(\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})}
+        \rfloor \nvdash d$, para cada $d \in Des$.
+        \item Si $
+        (\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})
+        \in \omega^n \times \Sigma^{*m} - D_f$, entonces $M$ no se detiene
+        partiendo de 
+        \begin{center}
+                $\lfloor q_0 B |^{x_1} B \dots B |^{x_n} B 
+                \alpha_1 B \dots B \alpha_m \rfloor$
+        \end{center}
+\end{enumerate}
 
 \end{document} 
