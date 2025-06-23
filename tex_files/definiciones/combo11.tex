@@ -1,5 +1,8 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 11 }
 
@@ -12,13 +15,57 @@
 Defina:
 
 \begin{enumerate}
-    \item $\Psi_{\mathcal{P}}^{n, m, \#} $
+    \item $\Psi_{\mathcal{P}}^{n, m, \#}$
 
     \item "$f$ es $\Sigma$-computable"
     
     \item "$\mathcal{P}$ computa a $f$"
     
     \item $M^{\leq}(P)$
+\end{enumerate}
+
+\(\)
+\begin{center}
+    Respuestas: 
+    \(\)
+\end{center}
+
+\begin{enumerate}
+    \item Dado $\mathcal{P} \in \text{Pro}^{\Sigma}$, definamos para cada
+    par $n, m \geq 0$, la función $\Psi_{\mathcal{P}}^{n, m, \#}$ de la siguiente 
+    manera:
+
+    \begin{center}
+        $D^{n,m,\#}_{\Psi_{\mathcal{P}}} = \left\{ (\vec{x}, \vec{\alpha}) \in \omega^n \times \Sigma^{*m} : \mathcal{P} \text{ termina, partiendo del estado } \parallel x_1, \ldots, x_n, \alpha_1, \ldots, \alpha_m \parallel \right\}$
+    \end{center}
+    
+    \begin{center}
+        $\Psi^{n,m,\#}_{\mathcal{P}}(\vec{x}, \vec{\alpha}) = \text{valor de N1 en el estado obtenido cuando } \mathcal{P} \text{ termina, partiendo de } \parallel x_1, \ldots, x_n, \alpha_1, \ldots, \alpha_m \parallel$
+    \end{center}
+
+    \item Una función $f : S \subseteq \omega^n \times \Sigma^{*m}
+    \rightarrow s$ con $s \in \{\omega, \Sigma^{*}\}$ es llamada $\Sigma-computable$ si hay un programa
+    $\mathcal{P}$ de $\mathcal{S}^{\Sigma}$ que la computa
+
+    \item Diremos que $\mathcal{P}$ computa a $f : S \subseteq \omega^n \times \Sigma^{*m}
+    \rightarrow s$ con $s \in \{\omega, \Sigma^{*}\}$ si 
+    $f = \Psi_{\mathcal{P}}^{n, m, \#}$ si $s = \#$ ó 
+    $f = \Psi_{\mathcal{P}}^{n, m, *}$ si $s = *$
+
+    \item Sea $\Sigma$ un alfabeto no vacío, sea $\leq$ un orden total sobre $\Sigma$
+     y sea $P : D_P 
+    \subseteq \omega^{n} \times \Sigma^{*m} \times \Sigma^{*} \rightarrow \omega$ un predicado.
+    Dado $(\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})
+    \in \omega^n \times \Sigma^{*m}$, cuando exista al menos un $\alpha \in \Sigma^{*}$ tal que
+    $P(\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha}, \alpha) = 1$, 
+    usaremos $min_\alpha^{\leq} P(\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha}, \alpha)$ para
+    denotar al menor $\alpha \in \Sigma^{*}$
+    tal que $P(\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha}, \alpha) = 1$. Definimos:
+    \begin{center}
+        $M^{\leq}(P) = \lambda\overset{\rightarrow}{x} \overset{\rightarrow}{\alpha}
+        [min_\alpha^{\leq} P(\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha}, \alpha)]$
+    \end{center}
+
 \end{enumerate}
 
 \end{document} 
