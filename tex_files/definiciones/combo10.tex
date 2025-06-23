@@ -1,7 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts}
-\usepackage{amsmath}
+\usepackage{amsmath, amssymb}
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 10 }
 
@@ -24,6 +24,45 @@ Defina relativo al lenguaje $S^{\Sigma}$
     
     \item "$\mathcal{P}$ se detiene (luego de $t$ pasos), partiendo del estado
     $(\overset{\rightarrow}{s}, \overset{\rightarrow}{\sigma})$"
+\end{enumerate}
+
+\(\)
+\begin{center}
+    Respuestas: 
+    \(\)
+\end{center}
+
+\begin{enumerate}
+    \item Un estado es un par $(\overset{\rightarrow}{s}, \overset{\rightarrow}{\sigma}) = 
+    ((s_1, s_2, \dots), (\sigma_1, \sigma_2, \dots))
+    \in \omega^{[\mathbf{N}]} \times \Sigma^{*[\mathbf{N}]}$
+
+    \item Una descripción instantánea es una terna 
+    $(i, \overset{\rightarrow}{s}, \overset{\rightarrow}{\sigma})$ tal que 
+    $(\overset{\rightarrow}{s}, \overset{\rightarrow}{\sigma})$ es un estado e $i \in \omega$
+
+    \item $S_{\mathcal{P}} : \omega \times \omega^{[\mathbf{N}]} \times \Sigma^{*[\mathbf{N}]}
+    \rightarrow \omega \times \omega^{[\mathbf{N}]} \times \Sigma^{*[\mathbf{N}]}$
+
+    \begin{center}
+        $S_{\mathcal{P}} (i, \overset{\rightarrow}{s}, \overset{\rightarrow}{\sigma}) = $
+        descripción instantánea que resulta luego de realizar $I_i^{\mathcal{P}}$,
+        estando en estado $(\overset{\rightarrow}{s}, \overset{\rightarrow}{\sigma})$
+    \end{center}
+
+    \item Si
+                \[
+                \overbrace{S_{\mathcal{P}}(\dots S_{\mathcal{P}}(S_{\mathcal{P}}(1, \vec{s}, \vec{\sigma})) \dots)}^{t \text{ veces}} = (j, \vec{u}, \vec{\eta})
+                \]
+                diremos que \( (\vec{u}, \vec{\eta}) \) es el \textit{estado obtenido luego de \( t \) pasos, partiendo del estado \( (\vec{s}, \vec{\sigma}) \)}.
+
+    \item Cuando la primer coordenada de 
+                \[
+                \overbrace{S_{\mathcal{P}}(\dots S_{\mathcal{P}}(S_{\mathcal{P}}(1, \vec{s}, \vec{\sigma})) \dots)}^{t \text{ veces}}
+                \]
+                sea igual a $n(\mathcal{P}) + 1$, diremos que $\mathcal{P}$ 
+                \textit{se detiene (luego de $t$ pasos), partiendo
+                desde el estado} $(\overset{\rightarrow}{s}, \overset{\rightarrow}{\sigma})$
 \end{enumerate}
 
 \end{document} 
