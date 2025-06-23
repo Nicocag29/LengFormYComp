@@ -33,19 +33,28 @@
     tal que $I_F = S$ y $F_i$ sea $\Sigma$-recursiva, para cada
     $i \in \{1, \dots, n+m\}$
 
-    \item $s^{\leq} : \Sigma^{*} \rightarrow \Sigma^{*}$
+    \item Sea $\leq$ un orden total sobre un alfabeto no vacío $\Sigma$
+    y supongamos $\Sigma = \{a_1, \dots, a_n\}$ con $a_1 \leq,
+    \dots, \leq a_n$ entonces
+     $s^{\leq} : \Sigma^{*} \rightarrow \Sigma^{*}$
     \begin{align*}
         &s^{\leq}((a_n)^{m}) = (a_1)^{m+1}, \text{ para cada } m \geq 0 \\
         &s^{\leq}(\alpha a_i(a_n)^{m}) = \alpha a_{i+1}(a_1)^{m}
     \end{align*}
 
-    \item $*^{\leq} : \omega \rightarrow \Sigma^{*}$
+    \item Sea $\leq$ un orden total sobre un alfabeto no vacío $\Sigma$
+    y supongamos $\Sigma = \{a_1, \dots, a_n\}$ con $a_1 \leq,
+    \dots, \leq a_n$ entonces
+    $*^{\leq} : \omega \rightarrow \Sigma^{*}$
     \begin{align*}
         &*^{\leq}(0) = \varepsilon \\
         &*^{\leq}(i + 1) = s^{\leq}(*^{\leq}(i))
     \end{align*}
 
-    \item $\#^{\leq} : \Sigma^{*} \rightarrow \omega$
+    \item Sea $\leq$ un orden total sobre un alfabeto no vacío $\Sigma$
+    y supongamos $\Sigma = \{a_1, \dots, a_n\}$ con $a_1 \leq,
+    \dots, \leq a_n$ entonces
+    $\#^{\leq} : \Sigma^{*} \rightarrow \omega$
     \begin{align*}
         &\#^{\leq}(\varepsilon) = 0 \\
         &\#^{\leq}(a_{i_k} \dots a_{i_0}) = i_k n^k + \dots + i_0 n^0 
