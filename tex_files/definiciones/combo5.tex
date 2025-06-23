@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 5 }
 
@@ -13,5 +13,30 @@
 Defina cuando un conjunto $S \subseteq \omega^n \times \Sigma^{*m}$
 es llamado $\Sigma$-efectivamente computable y defina: "el procedimiento
 efectivo $\mathbb{P}$ decide la pertenencia a $S$"
+
+\(\)
+\begin{center}
+    Respuesta: 
+    \(\)
+\end{center}
+
+Un conjunto $S \subseteq \omega^n \times \Sigma^{*m}$
+es llamado $\Sigma$-efectivamente computable cuando la función
+$\chi_{S}^{\omega^n \times \Sigma^{*m}}$ sea $\Sigma$-efectivamente
+computable. O sea $S$ es $\Sigma$-efectivamente computable
+sii hay un procedimiento efectivo $\mathbb{P}$, el cual 
+computa a $\chi_{S}^{\omega^n \times \Sigma^{*m}}$, es decir
+\begin{align*}
+        &\text{- El conjunto de datos de entrada de }
+        \mathbb{P} \text{ es } \omega^n \times \Sigma^{*m} 
+        \text{, siempre termina y da como }\\
+        &\text{dato de salida un elemento de } \{0, 1\}.\\
+        &\text{- Dado }(\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha})
+        \in \omega^n \times \Sigma^{*m}, \text{ } \mathbb{P} 
+        \text{ da como salida al número } 1 \text{ si }
+        (\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha}) \in
+        S \text{ y al número }\\
+        &0 \text{ si } (\overset{\rightarrow}{x}, \overset{\rightarrow}{\alpha}) \notin S. 
+\end{align*}
 
 \end{document} 
