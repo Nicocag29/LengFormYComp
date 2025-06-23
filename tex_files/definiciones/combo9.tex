@@ -1,6 +1,7 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
 \usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 9 }
 
@@ -22,6 +23,48 @@ Defina:
     \item $n(\mathcal{P})$
     
     \item $Bas$
+\end{enumerate}
+
+\(\)
+\begin{center}
+    Respuestas: 
+    \(\)
+\end{center}
+
+\begin{enumerate}
+    \item $I$ es una instrucción básica de $\mathcal{S}^{\Sigma}$ 
+    ó una palabra de la forma $\alpha I'$, donde $\alpha \in
+    \{L \bar{n} : n \in \mathbf{N} \}$ e $I'$ es una instrucción
+    básica de $\mathcal{S}^{\Sigma}$.
+
+    \item $\mathcal{P}$ es una palabra de la forma
+    \begin{center}
+        $I_1 I_2 \dots I_n$
+    \end{center}
+    donde $n \geq 1, I_1 I_2 \dots I_n \in \text{Ins}^{\Sigma}$. Y además
+    se cumple la siguiente propiedad: para cada $i \in \{1, \dots, n\}$,
+    si $\text{GOTOL}\bar{m}$ es un tramo final de $I_i$, entonces
+    existe $j \in \{1, \dots, n\}$ tal que $I_j$ tiene label
+    $\text{L}\bar{m}$
+
+    \item $i$-ésima instrucción de la sucesión de instrucciones 
+    $I_1, \dots, I_n$ \\tal que $\mathcal{P} = I_1 \dots I_n$ ó $\varepsilon$
+    cuando $i = 0$ ó $i > n(\mathcal{P})$
+
+    \item Cantidad de instrucciones de $\mathcal{P}$. Es decir 
+    $\mathcal{P} = I_1 \dots I_{n(\mathcal{P})}$.
+
+    \item $Bas : \text{Ins}^{\Sigma} \rightarrow (\Sigma \cup \Sigma_p)^{*}$
+    \begin{center}
+        
+    \[
+        Bas(I) =
+        \begin{cases}
+        J & \text{si } I \text{ es de la forma } L\bar{k}J \text{ con } J \in \text{Ins}^\Sigma \\
+        I & \text{caso contrario}
+        \end{cases}
+    \]
+    \end{center}
 \end{enumerate}
 
 \end{document} 
