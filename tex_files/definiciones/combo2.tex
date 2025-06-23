@@ -1,6 +1,6 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
-\usepackage{amsmath}
+\usepackage{amsmath, amssymb}
 
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 2 }
@@ -23,6 +23,58 @@ Defina:
     \item $(x)$
     
     \item $(x)_i$
+\end{enumerate}
+\(\)
+\begin{center}
+    Respuestas: 
+    \(\)
+\end{center}
+
+\begin{enumerate}
+        \item Para $d, d' \in Des$ y $n \geq 0$, escribiremos $d \overset{n}{\vdash} d'$
+        si existen $d_1, \dots, d_{n+1} \in Des$ tales que 
+        \begin{align*}
+                d &= d_1 \\
+                d' &= d_{n+1} \\
+                d_i &\vdash d_{i+1}, \quad \text{para } i = 1, \ldots, n
+        \end{align*}
+        Por último: $d \overset{*}{\vdash} d'$ sii $(\exists n \in \omega)$ $d \overset{n}{\vdash} d'$
+
+        \item Diremos que una palabra $\alpha \in \Sigma^{*} \text{ } es \text{ } 
+        aceptada \text{ } por \text{ } M \text{ } por \text{ } alcance \text{ }
+        de \text{ } estado \text{ } final \text{ } cuando$
+        \begin{center}
+                $\left\lceil q_0 B \alpha \right\rceil \vdash^* d, 
+                \text{ con } d \text{ tal que } St(d) \in F.$
+        \end{center}
+        El $lenguaje \text{ } aceptado \text{ } por \text{ } M \text{ } por alcance
+        \text{ } de \text{ } estado \text{ } final$ se define de la siguiente manera
+        \begin{center}
+                $L(M) = \{ \alpha \in \Sigma^{*}: \text{es aceptada por } M \text{ por 
+                alcance de estado final}\}$
+        \end{center}
+
+        \item $f : D_f \subseteq \omega^n \times \Sigma^{*m}$ y:
+        \begin{align*}
+                s &= \# \text{ y } I_f \subseteq \omega \\
+                \text{ ó } \\
+                s &= * \text{ y } I_f \subseteq \Sigma^{*}
+        \end{align*}
+
+        \item Dado $x \in \mathbf{N}$, usaremos $(x)$ para denotar la única infinitupla
+        $(s_1, s_2, \dots) \in \omega^{\mathbf{N}}$ tal que
+        \begin{center}
+                $x = \langle s_1, s_2, \dots \rangle = \displaystyle \prod_{i=1}^{\infty} pr(i)^{s_i}$
+        \end{center}
+
+        \item Para $i \in \mathbf{N}$, usaremos $(x)_i$ para denotar a $s_i$ de la infinitupla
+        $(x)$. Es decir que 
+        \begin{enumerate}
+                \item $(x) = ((x)_1, (x)_2, \dots)$
+                \item $(x)_i$ es el producto de $pr(i)$ en la (única posible) factorización de 
+                $x$ como producto de primos
+                
+        \end{enumerate}
 \end{enumerate}
 
 \end{document} 
