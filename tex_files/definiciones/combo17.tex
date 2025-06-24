@@ -1,5 +1,9 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 17 }
 
@@ -11,5 +15,34 @@
 
 Defina el concepto de función y desarrolle las tres Convenciones
 Notacionales asociadas a dicho concepto (Guía 1)
+
+\(\)
+\begin{center}
+    Respuesta: 
+    \(\)
+\end{center}
+
+Una $funcion$ es un conjunto $f$ de pares ordenados con la siguiente propiedad:
+\begin{center}
+        Si $(x, y) \in f$ y $(x, z) \in f$, entonces $y = z$
+\end{center}
+\(\)
+
+\begin{itemize}
+        \item[\textbf{Convención Notacional 1:}] dado $x \in D_f$, usaremos 
+        $f(x)$ para denotar al único $y \in I_f$ tal que $(x, y) \in f$
+        \item[\textbf{Convención Notacional 2:}] escribiremos $f : S \subseteq A \rightarrow B$ 
+        para expresar que $f$ es una función tal que $D_f = S \subseteq A$ y $I_f \subseteq B$.
+        También escribiremos $f : A \rightarrow B$ para expresar para expresar que $f$ es una 
+        función tal que $D_f = A$ y $I_f \subseteq B$. En tal contexto llamaremos a 
+        $B$ \textit{conjunto de llegada}. Por supuesto $B$ no está determinado por $f$ ya que 
+        solo debe cumplir $I_f \subseteq B$. Es decir que cualquier conjunto $B$ que contenga a 
+        $I_f$ puede ser considerado conjunto de llegada de $f$.
+        \item[\textbf{Convención Notacional 3:}] muchas veces para definir una función $f$, lo haremos 
+        dando su dominio y su regla de asignación, es decir especificaremos en forma precisa qué 
+        conjunto es el dominio de $f$ y además especificaremos en forma precisa quién es $f(x)$ para cada 
+        $x$ de dicho dominio. Obviamente esto determina por completo a la función $f$ ya que siempre se da 
+        que $f = \{(x, f(x)) : x \in D_f\}$.
+\end{itemize}
 
 \end{document} 
