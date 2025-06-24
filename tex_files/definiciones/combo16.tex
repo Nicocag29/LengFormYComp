@@ -1,5 +1,10 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 16 }
 
@@ -15,4 +20,41 @@ describa qué tipo de objeto es y qué propiedades debe tener el macro:
     $[IF$ $P(V1, W1)$ $GOTO$ $A1]$
 \end{center}
 
+\(\)
+\begin{center}
+    Respuesta: 
+    \(\)
+\end{center}
+
+Es una palabra que denota el macro $M$ que cumple las siguientes propiedades:
+\begin{enumerate}
+    \item Las variables oficiales de $M$ son V1, W1
+    \item A1 es el único label oficial de $M$
+    \item Si reemplazamos:
+    \begin{itemize}
+        \item las variables oficiales de $M$ por variables concretas $N \bar{k}, P \bar{j}$
+        
+        \item el label oficial A1 por un label concreto $L \bar{t}$
+        
+        \item las variables auxiliares de $M$ por variables concretas (distintas de a dos) y distintas de $N \bar{k}, P \bar{j}$
+        
+        \item los labels auxiliares de $M$ por labels concretos (distintos de a dos) y ninguno igual a $L \bar{t}$
+    \end{itemize}
+    entonces la palabra así obtenida es un programa $\mathcal{E}$ de $\mathcal{S}^{\Sigma}$ (salvo por la ley de los GOTO respecto de $L \bar{t}$) que denotaremos en general con
+
+    \[
+    [\text{IF } P(N \bar{k}, P \bar{j}) \text{ GOTO } L \bar{t}]
+    \]
+
+    el cual debe tener la siguiente propiedad:
+
+    \begin{description}
+        \item[(E)] Si hacemos correr $\mathcal{E}$ partiendo de un estado $e$ que le asigne a las variables $N \bar{k}, P \bar{j}$ valores $x_1, \alpha_1$, entonces independientemente de los valores que les asigne $e$ al resto de las variables (incluidas las que fueron a reemplazar a las variables auxiliares de $M$) se dará que:
+        \begin{itemize}
+            \item[(i)] si $(x_1, \alpha_1) \notin D_P$, entonces $\mathcal{E}$ no se detiene
+            \item[(ii)] si $(x_1, \alpha_1) \in D_P$ y $P(x_1, \alpha_1) = 1$, entonces luego de una cantidad finita de pasos, $\mathcal{E}$ direcciona al label $L \bar{t}$ quedando en un estado $e'$ el cual solo puede diferir de $e$ en los valores que le asigna a las variables que fueron a reemplazar a las variables auxiliares de $M$. 
+            \item[(iii)] si $(x_1, \alpha_1) \in D_P$ y $P(x_1, \alpha_1) = 0$, entonces luego de una cantidad finita de pasos, el programa se detiene quedando en un estado $e'$ el cual solo puede diferir de $e$ en los valores que le asigna a las variables que fueron a reemplazar a las variables auxiliares de $M$. 
+        \end{itemize}
+    \end{description}
+\end{enumerate}
 \end{document} 
