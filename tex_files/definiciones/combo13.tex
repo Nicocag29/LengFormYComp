@@ -1,5 +1,8 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 13 }
 
@@ -21,6 +24,63 @@ Defina:
     \item $T^{n, m}$
     \item $AutoHalt^{\Sigma}$
     \item Los conjuntos $A$ y $N$
+\end{enumerate}
+
+\(\)
+\begin{center}
+    Respuestas: 
+    \(\)
+\end{center}
+
+\begin{enumerate}
+    \item Sean $n, m \in \omega$ fijos. Definamos
+    \[
+        i^{n,m} : \omega \times \omega^n \times \Sigma^{*m} \times \text{Pro}^\Sigma \to \omega
+        \]
+        \[
+        E_{\#}^{n,m} : \omega \times \omega^n \times \Sigma^{*m} \times \text{Pro}^\Sigma \to \omega^{[\mathbf{N}]}
+        \]
+        \[
+        E_{*}^{n,m} : \omega \times \omega^n \times \Sigma^{*m} \times \text{Pro}^\Sigma \to \Sigma^{*[\mathbf{N}]}
+    \]
+
+de la siguiente manera
+
+\begin{align*}
+&(i^{n,m}(0, \vec{x}, \vec{\alpha}, \mathcal{P}), E_{\#}^{n,m}(0, \vec{x}, \vec{\alpha}, \mathcal{P}), E_{*}^{n,m}(0, \vec{x}, \vec{\alpha}, \mathcal{P})) \\
+&= (1, (x_1, ..., x_n, 0, ...), (\alpha_1, ..., \alpha_m, \varepsilon, ...)) \\
+&(i^{n,m}(t+1, \vec{x}, \vec{\alpha}, \mathcal{P}), E_{\#}^{n,m}(t+1, \vec{x}, \vec{\alpha}, \mathcal{P}), E_{*}^{n,m}(t+1, \vec{x}, \vec{\alpha}, \mathcal{P})) \\
+&= S_\mathcal{P}(i^{n,m}(t, \vec{x}, \vec{\alpha}, \mathcal{P}), E_{\#}^{n,m}(t, \vec{x}, \vec{\alpha}, \mathcal{P}), E_{*}^{n,m}(t, \vec{x}, \vec{\alpha}, \mathcal{P}))
+\end{align*}
+
+\item Definamos para cada $j \in \mathbf{N}$, funciones
+\begin{center}
+    $E_{\#j}^{n, m} : \omega \times \omega^n \times \Sigma^{*m} \times \text{Pro}^{\Sigma} \rightarrow \omega$\\
+    $E_{*j}^{n, m} : \omega \times \omega^n \times \Sigma^{*m} \times \text{Pro}^{\Sigma} \rightarrow \Sigma^{*}$\\
+\end{center}
+de la siguiente manera:
+\begin{center}
+    $E_{\#j}^{n, m}(t, \vec{x}, \vec{\alpha}, \mathcal{P}) = j-\text{ésima coordenada de } E_{\#}^{n, m}(t, \vec{x}, \vec{\alpha}, \mathcal{P})$\\
+    $E_{*sj}^{n, m}(t, \vec{x}, \vec{\alpha}, \mathcal{P}) = j-\text{ésima coordenada de } E_{*}^{n, m}(t, \vec{x}, \vec{\alpha}, \mathcal{P})$\\
+\end{center}
+
+\item Dados $n, m \in \omega$, definamos:
+\begin{center}
+    $Halt^{n, m} = \lambda t \vec{x} \vec{\alpha} \mathcal{P} [i^{n, m}(t, \vec{x}, \vec{\alpha}, \mathcal{P}) = n(\mathcal{P}) + 1]$
+\end{center}
+
+\item Dados $n, m \in \omega$, $T^{n, m} = M(Halt^{n, m})$
+\item Cuando $\Sigma \supseteq \Sigma_p$, definimos:
+\begin{center}
+    $AutoHalt^{\Sigma} = \lambda \mathcal{P}[(\exists t \in \omega) \text{ } Halt^{0,1}(t, \mathcal{P}, \mathcal{P})]$
+\end{center}
+
+\item Cuando $\Sigma \supseteq \Sigma_p$, definimos:
+\begin{center}
+    $A = \{\mathcal{P} \in \text{Pro}^{\Sigma} : AutoHalt^{\Sigma}(\mathcal{P}) = 1 \}$\\
+    $N = \{\mathcal{P} \in \text{Pro}^{\Sigma} : AutoHalt^{\Sigma}(\mathcal{P}) = 0 \}$\\
+\end{center}
+
 \end{enumerate}
 
 \end{document} 
