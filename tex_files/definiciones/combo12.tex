@@ -1,5 +1,8 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 12 }
 
@@ -13,4 +16,26 @@ Defina cuando un conjunto $S \subseteq \omega^n \times \Sigma^{*m}$ es llamado
 $\Sigma$-computable, cuando es llamado $\Sigma$-enumerable y defina 
 "el programa $\mathcal{P}$ enumera a $S$"
 
+\(\)
+\begin{center}
+    Respuesta: 
+    \(\)
+\end{center}
+
+Un conjunto $S \subseteq \omega^n \times \Sigma^{*m}$ es llamado
+$\Sigma$-computable cuando la función $\chi_S^{\omega^n \times \Sigma^{*m}}$ sea $\Sigma$-computable.\\
+\\
+
+Un conjunto $S \subseteq \omega^n \times \Sigma^{*m}$ es llamado $\Sigma$-enumerable
+cuando sea vacío o haya una función $F : \omega \rightarrow \omega^n \times \Sigma^{*m}$
+tal que $I_F = S$ y $F_(i)$ sea $\Sigma$-computable, para cada $i \in \{1, \dots, n + m\}$\\
+\\
+
+Un programa $\mathcal{P} \in \text{Pro}^{\Sigma}$  enumera a $S$ cuando:
+\begin{itemize}
+  \item[(a)] \textit{Para cada $x \in \omega$, tenemos que $\mathcal{P}$ se detiene partiendo desde el estado $\|x\|$ y llega a un estado de la forma $((x_1, ..., x_n, y_1, ...), (\alpha_1, ..., \alpha_m, \beta_1, ...))$, donde $(x_1, ..., x_n, \alpha_1, ..., \alpha_m) \in S$.}
+  
+  \item[(b)] \textit{Para cada $(x_1, ... x_n, \alpha_1, ..., \alpha_m) \in S$ hay un $x \in \omega$ tal que $\mathcal{P}$ se detiene partiendo desde el estado $\|x\|$ y llega a un estado de la forma}\\
+  \textit{$((x_1, ..., x_n, y_1, ...), (\alpha_1, ..., \alpha_m, \beta_1, ...))$} 
+\end{itemize}
 \end{document} 
