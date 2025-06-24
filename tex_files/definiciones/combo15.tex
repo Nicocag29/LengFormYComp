@@ -1,5 +1,11 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+
+
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 15 }
 
@@ -14,5 +20,43 @@ describa qué tipo de objeto es y qué propiedades debe tener el macro:
 \begin{center}
     $[V2 \leftarrow f(V1, W1)]$
 \end{center}
+
+\(\)
+\begin{center}
+    Respuestas: 
+    \(\)
+\end{center}
+
+Ese macro es una palabra que cumple:
+\begin{enumerate}
+    \item Sus variables oficiales son $V1, V2, W1$
+    \item No tiene labels oficiales
+    \item Si reemplazamos las variables oficiales por variables concretas
+    $N \bar{k_1}, N \bar{k_2}, P \bar{j_1}$, las variable auxiliares por 
+    variables concretas distintas dos a dos y no en 
+    $N \bar{k_1}, N \bar{k_2}, P \bar{j_1}$ y los lables auxiliares 
+    por labels concretos distintos dos a dos, entonces la palabra obtenida 
+    es un programa $\mathcal{P} \in \text{Pro}^{\Sigma}$ que denotaremos
+    con 
+    \begin{center}
+        $[N \bar{k_2} \leftarrow f( N \bar{k_1}, P \bar{j_1})]$
+    \end{center}
+    el cual debe tener la siguiente propiedad:\\
+    Si hacemos correr $\mathcal{P}$ partiendo de un estado $e$ que le asigne a las variables 
+$N \bar{k_1}, P \bar{j_1}$ 
+valores $x_1, \alpha_1$, entonces, independientemente de los valores que les asigne $e$ al resto de las variables 
+se dará que
+
+    \begin{itemize}
+        \item si $(x_1, \alpha_1) \notin D_f$, entonces $\mathcal{P}$ no se detiene
+        \item si $(x_1, \alpha_1) \in D_f$, entonces $\mathcal{P}$ se detiene y llega a un estado $e'$ el cual cumple:
+        \begin{itemize}
+            \item $e'$ le asigna a $N \bar{k_2}$ el valor $f(x_1, \alpha_1)$
+            \item $e'$ solo puede diferir de $e$ en los valores que le asigna a $N \bar{k_2}$ o 
+            las variables auxiliares.
+        \end{itemize}
+    \end{itemize}
+
+\end{enumerate}
 
 \end{document} 
