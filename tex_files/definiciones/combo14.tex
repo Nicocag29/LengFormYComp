@@ -1,5 +1,8 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+
 \title{Lenguajes Formales y Computabilidad \\
         \large Definiciones y Convenciones: Combo 14 }
 
@@ -11,4 +14,63 @@
 
 Explique en forma detallada la notación lambda
 
+\(\)
+\begin{center}
+    Respuesta: 
+    \(\)
+\end{center}
+
+Dado un alfabeto finito $\Sigma$, las expresiones que usamos en notación
+lambda deben cumplir lo siguiente:
+\begin{itemize}
+        \item Solo involucran variables numéricas $(x, y, z, t, k, x_1, x_2, y_1, etc)$
+        que se valuarán con números en $\omega$, y variables alfabéticas
+        $(\alpha, \beta, \gamma, \alpha_1, \alpha_2, \beta_1, etc)$ que se 
+        valuarán con palabras de $\Sigma^{*}$
+        \item Para ciertas valuaciones de las variables, la expresión puede 
+        no estar definida. Por ejemplo $Pred(x)$ con $x = 0$
+        \item Toda expresión $E$ debe cumplir alguna de las siguientes propiedades:
+        \begin{itemize}
+                \item[(a)] Los valores que asuma $E$ cuando hayan sido asignados 
+                valores de $\omega$ a sus variables numéricas y valores de $\Sigma^{*}$
+                a sus variables alfabéticas de manera que $E$ esté definida para esos valores, 
+                deberán ser siempre elementos de $\omega$
+                \item[(b)] Los valores que asuma $E$ cuando hayan sido asignados 
+                valores de $\omega$ a sus variables numéricas y valores de $\Sigma^{*}$
+                a sus variables alfabéticas de manera que $E$ esté definida para esos valores, 
+                deberán ser siempre elementos de $\Sigma$
+        \end{itemize}
+        \item Las expresiones pueden ser escritas en lenguaje coloquial castellano.
+        \item Las expresiones booleanas toman valores en $\{0, 1\} \subseteq \omega$: $1$ cuando sean verdaderas, 
+        $0$ cuando sean falsas.
+   
+\end{itemize}
+
+        Las expresiones que cumplan estas propiedades serás llamadas\\
+$"lambdificables \text{ } respecto \text{ } a \text{ } \Sigma"$\\
+\\
+
+        Ahora, sea $E$ una expresión lambdificables respecto a $\Sigma$.
+        Sea $x_1, \dots, x_n, \alpha_1, \dots, \alpha_m$, una lista de variables todas
+        distintas tal que las variables numéricas que ocurran en $E$ están contenidas 
+        en la lista $x_1, \dots, x_n$ y las alfabéticas que ocurran en $E$ 
+        están contenidas en $\alpha_1, \dots, \alpha_m$. Entonces:
+
+        \begin{center}
+                $\lambda x_1, \dots, x_n, \alpha_1, \dots, \alpha_m [E]$
+        \end{center}
+
+        denotará la función definida por:
+
+        \begin{itemize}
+                \item el dominio de $\lambda x_1, \dots, x_n, \alpha_1, \dots, \alpha_m [E]$
+                es el conjunto de las $n + m$-uplas 
+                $(k_1, \dots, k_n, \beta_1, \dots, \beta_m) \in \omega^{n} \times \Sigma^{*m}$
+                tales que $E$ esté definida cuando le asignemos a cada $x_i$ el valor $k_i$ 
+                y a cada $\alpha_i$ el valor $\beta_i$
+                \item $\lambda x_1, \dots, x_n, \alpha_1, \dots, \alpha_m [E]
+                (k_1, \dots, k_n, \beta_1, \dots, \beta_m) = $ valor que ocurre en $E$ cuando 
+                asignamos a cada $x_i$ el valor $k_i$ 
+                y a cada $\alpha_i$ el valor $\beta_i$
+        \end{itemize}
 \end{document} 
