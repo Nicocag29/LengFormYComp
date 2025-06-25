@@ -1,0 +1,125 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+
+
+\title{Lenguajes Formales y Computabilidad \\
+        \large Teoremas: Combo 1 }
+
+\author{Nicolás Cagliero}
+
+\begin{document}
+\maketitle
+
+\textbf{Proposición} (Caracterización de conjuntos $\Sigma$-p.r.). \textit{Un conjunto $S$ es $\Sigma$-p.r. sii $S$ es el dominio de alguna función $\Sigma$-p.r.}
+\medskip
+
+(En la inducción de la prueba hacer solo el caso de la composición)
+\medskip
+
+\textit{Proof.} $(\Rightarrow)$ Note que $S = D_{\text{Pred}_{S}^{\omega^n \times \Sigma^{*m}}}$.
+
+$(\Leftarrow)$ Probaremos por inducción en $k$ que $D_F$ es $\Sigma$-p.r., para cada $F \in \text{PR}^{\Sigma}_{k}$.\\
+
+El caso $k = 0$ es fácil, $F \in \{Suc, \text{ } Pred, \text{ } C_0^{0,0}, \text{ } C_{\varepsilon}^{0,0}\} \text{ } \cup \text{ } \{d_a : a \in \Sigma\} \text{ } \cup \text{ } \{p_j^{n,m} : 1 \leq j \leq n + m\}$ y los dominios de estas funciones son claramente $\Sigma$-p.r.. Supongamos el resultado vale para un $k$ fijo y supongamos $F \in \text{PR}^{\Sigma}_{k+1}$. Veremos entonces que $D_F$ es $\Sigma$-p.r. Hay varios casos.\\
+
+Supongamos ahora que $F = g \circ [g_1, ..., g_r]$ con $g, g_1, ..., g_r \in \text{PR}^{\Sigma}_k$. Si $F = \emptyset$, entonces es claro que $D_F = \emptyset$ es $\Sigma$-p.r. Supongamos entonces que $F$ no es la función vacía. Tenemos entonces que $r$ es de la forma $n + m$ y
+
+\[
+g : D_g \subseteq \omega^n \times \Sigma^{*m} \to O
+\]
+
+\[
+g_i : D_{g_i} \subseteq \omega^k \times \Sigma^{*l} \to \omega, \quad i = 1, ..., n
+\]
+
+\[
+g_i : D_{g_i} \subseteq \omega^k \times \Sigma^{*l} \to \Sigma^*, \quad i = n + 1, ..., n + m
+\]
+
+con $O \in \{\omega, \Sigma^*\}$ y $k, l \in \omega$. Por Lema 19, hay funciones $\Sigma$-p.r. $\bar{g}_1, ..., \bar{g}_{n+m}$ las cuales son $\Sigma$-totales y cumplen
+
+\[
+g_i = \bar{g}_i|_{D_{g_i}}, \quad \text{para } i = 1, ..., n + m.
+\]
+
+Por hipótesis inductiva los conjuntos $D_g$, $D_{g_i}$, $i = 1, ..., n+m$, son $\Sigma$-p.r. y por lo tanto
+
+\[
+S = \bigcap_{i=1}^{n+m} D_{g_i}
+\]
+
+lo es. Nótese que
+
+\[
+\chi_{D_F}^{\omega^k \times \Sigma^l} = \left( \chi_{D_g}^{\omega^n \times \Sigma^{*m}} \circ [\bar{g}_1, ..., \bar{g}_{n+m}]  \land \chi_S^{\omega^k \times \Sigma^l}\right)
+\]
+
+lo cual nos dice que $D_F$ es $\Sigma$-p.r. \hfill $\blacksquare$
+
+\bigskip
+
+\textbf{Teorema} (Neumann vence a Gödel). \textit{Si $h$ es $\Sigma$-recursiva, entonces $h$ es $\Sigma$-computable}
+
+\medskip
+
+(En la inducción de la prueba hacer solo el caso $h = R(f, \mathcal{G})$, con $I_h \subseteq \omega$)
+\medskip
+
+\textit{proof.}
+Probaremos por inducción en $k$ que
+\[
+(*) \quad \text{Si } h \in \mathsf{R}_k^{\Sigma}, \text{ entonces } h \text{ es } \Sigma\text{-computable}.
+\]
+
+El caso $k = 0$ es dejado al lector. Supongamos que $(*)$ vale para $k$, veremos que vale para $k + 1$. Sea $h \in \text{R}_{k+1}^{\Sigma} - \text{R}_k^{\Sigma}$. Hay varios casos...
+
+Supongamos $h = R(f, \mathcal{G})$, con
+\[
+f : S_1 \times \ldots \times S_n \times L_1 \times \ldots \times L_m \to \omega
+\]
+\[
+g_a : \omega \times S_1 \times \ldots \times S_n \times L_1 \times \ldots \times L_m \times \Sigma^* \to \omega, \quad a \in \Sigma
+\]
+
+elementos de $\text{RE}^\Sigma_k$. Sea $\Sigma = \{a_1, ..., a_r\}$. Por hipótesis inductiva, las funciones $f$, $g_a$, $a \in \Sigma$, son $\Sigma$-computables y por lo tanto tenemos macros
+
+\[
+[\text{V}\overline{n+1} \gets f(\text{V}1, ..., \text{V}\overline{n}, \text{W}1, ..., \text{W}\overline{m})]
+\]
+\[
+[\text{V}\overline{n+2} \gets g_{a_i}(\text{V}1, ..., \text{V}\overline{n}, \text{V}\overline{n+1}, \text{W}1, ..., \text{W}\overline{m}, \text{W}\overline{m+1})], \quad i = 1, ..., r
+\]
+
+\bigskip
+
+Podemos entonces hacer el siguiente programa:
+
+\begin{align*}
+\quad & [\text{N}\overline{n+1} \gets f(\text{N}1, ..., \text{N}\overline{n}, \text{P}1, ..., \text{P}\overline{m})] \\
+\text{L}\overline{r+1} \text{ }& \text{IF P}\overline{m+1} \text{ BEGINS } a_1 \text{ GOTO L1} \\
+& \vdots \\
+& \text{IF P}\overline{m+1} \text{ BEGINS } a_r \text{ GOTO L}\overline{r} \\
+& \text{GOTO L}\overline{r + 2} \\
+\\
+\text{L1} \quad & \text{P}\overline{m+1} \gets^\curvearrowright \text{P}\overline{m+1} \\
+& [\text{N}\overline{n+1} \gets g_{a_1}(\text{N}\overline{n+1}, \text{N}1, ..., \text{N}\overline{n}, \text{P}1, ..., \text{P}\overline{m}, \text{W}\overline{m+2})] \\
+& \text{P}\overline{m+2} \gets \text{P}\overline{m+2}. a_1 \\
+& \text{GOTO L}\overline{r+1} \\
+& \vdots \\
+\\
+\text{L}\overline{r} \quad & \text{P}\overline{m+1} \gets^\curvearrowright \text{P}\overline{m+1} \\
+& [\text{N}\overline{n+1} \gets g_{a_r}(\text{N}\overline{n+1}, \text{N}1, ..., \text{N}\overline{n}, \text{P}1, ..., \text{P}\overline{m}, \text{W}\overline{m+2})] \\
+& \text{P}m+2 \gets \text{P}m + 2 . a_r \\
+& \text{GOTO L}\overline{r+1} \\
+\\
+\text{L}\overline{r+2} \quad & \text{N}1 \gets \text{N}\overline{n+1}
+\end{align*}
+
+Es fácil chequear que este programa computa $h$.  \hfill $\blacksquare$
+
+
+\end{document}
