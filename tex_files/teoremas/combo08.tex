@@ -1,0 +1,150 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{stmaryrd}
+
+
+\title{Lenguajes Formales y Computabilidad \\
+        \large Teoremas: Combo 8 }
+
+\author{Tomás Maraschio}
+
+\begin{document}
+\maketitle
+
+\textbf{Lema.} \textit{Supongamos $\Sigma_p \subseteq \Sigma$. Entonces $AutoHalt^{\Sigma}$ no es $\Sigma$-recursivo.}
+
+\textit{Proof.}
+\[
+    AutoHalt^{\Sigma} = \lambda\mathcal{P}[(\exists t \in \omega) Halt^{0,1}(t, \mathcal{P}, \mathcal{P})]
+\]
+
+Notar que $D_{AutoHalt^{\Sigma}} = Pro^{\Sigma}$ y $\forall \mathcal{P} \in Pro^{\Sigma}$ se cumple
+\begin{center}
+    (*)  $AutoHalt^{\Sigma}(\mathcal{P}) = 1$ $\iff$ $\mathcal{P}$ se detiene partiendo de $\lVert\mathcal{P}\rVert$
+\end{center}
+
+Supongamos que $AutoHalt^{\Sigma}$ es $\Sigma$-recursiva, entonces, por el 2° manantial de macros, existe el macro
+\begin{center}
+    [ IF $AutoHalt^{\Sigma}$(W1) GOTO A1]
+\end{center}
+Luego, sea $\mathcal{P}_0$ = L1[ IF $AutoHalt^{\Sigma}$(P1) GOTO L1], tenemos que $\mathcal{P}_0$ se detiene partiendo de $\lVert\mathcal{P}_0\rVert$ si y solo si $AutoHalt^{\Sigma}$($\mathcal{P}_0$) = 0. Pero esto contradice la propiedad (*), y viene de suponer que $AutoHalt^{\Sigma}$ es $\Sigma$-recursiva, por lo que llegamos a que $AutoHalt^{\Sigma}$ no puede ser $\Sigma$-recursiva.
+\hfill $\blacksquare$
+\vspace{4em}
+
+
+\textbf{Teorema.} \textit{Supongamos $\Sigma_p \subseteq \Sigma$. Entonces $AutoHalt^{\Sigma}$ no es $\Sigma$-efectivamente computable. Es decir, no hay ningun procedimiento efectivo que decida si un programa de $S^{\Sigma}$ termina partiendo de sí mismo.}
+
+\textit{Proof.} La Tesis de Church dice que toda función $\Sigma$-efectivamente computable es $\Sigma$-recursiva. Por lo que si $AutoHalt^{\Sigma}$ fuese $\Sigma$-efectivamente computable, esta sería también $\Sigma$-recursiva, contradiciendo el lema anterior. Luego, $AutoHalt^{\Sigma}$ no es $\Sigma$-efectivamente computable.
+\hfill $\blacksquare$
+\vspace{4em}
+
+
+\textbf{Lema.} \textit{Supongamos $\Sigma_p \subseteq \Sigma$. Entonces}
+\[
+    A = \{\mathcal{P} \in Pro^{\Sigma} : AutoHalt^{\Sigma}(\mathcal{P}) = 1\}
+\]
+\textit{es $\Sigma$-recursivamente enumerable y no es $\Sigma$-recursivo. Mas aún, el conjunto}
+\[
+    N = \{\mathcal{P} \in Pro^{\Sigma} : AutoHalt^{\Sigma}(\mathcal{P}) = 0\}
+\]
+\textit{no es $\Sigma$-recursivamente enumerable.}
+
+\textit{Proof.} Sea $P = \lambda{t}\mathcal{P}[Halt^{0,1}(t, \mathcal{P}, \mathcal{P})] = Halt^{0,1} \circ [p^{1,1}_1, p^{1,1}_2, p^{1,1}_2]$. Notar que $D_P = \omega \times Pro^{\Sigma}$. Además, $P$ es $(\Sigma \cup \Sigma_p)$-p.r., que en este caso es lo mismo que $\Sigma$-p.r. Entonces, $M(P)$ es $\Sigma$-recursiva y además 
+\[
+    D_{M(P)} = \{\mathcal{P} \in Pro^{\Sigma} : (\exists t \in \omega) P(t, \mathcal{P}) = 1 \} = \{\mathcal{P} \in Pro^{\Sigma} :  AutoHalt^{\Sigma}(\mathcal{P}) = 1 \} = A
+\]
+Luego, por el teorema de caracterización de conjuntos $\Sigma$-recursivamente enumerables, que entre otras cosas dice que un conjunto es $\Sigma$-r.e. si y solo si es el dominio de alguna función $\Sigma$-recursiva, tenemos que \underline{$A$ es $\Sigma$-r.e.}
+
+Supongamos ahora que $N$ es $\Sigma$-r.e. Entonces, por el lema de restricción de funciones recursiva tenemos que $C^{0,1}_0 |_{N}$ es $\Sigma$-recursiva. Por el mismo lema, y como sabemos que $A$ es $\Sigma$-r.e., $C^{0,1}_1 |_{A}$ es $\Sigma$-recursiva. Además, notar que $A \cup N = Pro^{\Sigma}$ y $A \cap N = \emptyset$. Entonces, por el lema de división por casos de funciones $\Sigma$-recursivas, tenemos que la función
+\[
+    AutoHalt^{\Sigma} = C^{0,1}_1 |_{A} \cup C^{0,1}_0 |_{N}
+\]
+es $\Sigma$-recursiva. Pero esto contradice el lema probado anteriormente, por lo que \underline{$N$ no puede ser $\Sigma$-r.e.}
+
+Por último, supongamos que $A$ es $\Sigma$-recursivo, entonces el conjunto
+\[
+    N = Pro^{\Sigma} - A
+\]
+también es $\Sigma$-recursivo. Pero esto es un absurdo porque $N$ no es $\Sigma$-r.e. y por lo tanto tampoco es $\Sigma$-recursivo. Así, \underline{$A$ no es $\Sigma$-recursivo.}
+\hfill $\blacksquare$
+\vspace{4em}
+
+\textbf{Teorema.} (Neumann vence a Godel). \textit{Si $h$ es $\Sigma$-recursiva, entonces $h$ es $\Sigma$-computable.
+(En la induccion de la prueba hacer solo el caso $h = M(P)$)}
+
+\textit{Proof.} Probaré por inducción sobre $k$ que si $h \in R^{\Sigma}_k$ entonces h es $\Sigma$-computable.
+
+\underline{Caso base.} Para cada una de las funciones de $R^{\Sigma}_0$ daré un programa que las compute.
+\vspace{1em}
+
+\indent $Suc$:
+\[
+\begin{array}{ll}
+    & \text{N1} \leftarrow \text{N1} + 1
+\end{array}
+\]
+
+\indent $Pred$:
+\[
+\begin{array}{ll}
+\text{L1} & \text{IF N1} \neq 0 \text{ GOTO L2} \\
+    & \text{GOTO L1} \\
+\text{L2} & \text{N1} \leftarrow \text{N1} \dot{-} 1
+\end{array}
+\]
+
+\indent $C^{0,0}_0$ y $C^{0,0}_{\varepsilon}$:
+\[
+\begin{array}{ll}
+    & \text{SKIP}
+\end{array}
+\]
+
+\indent $d_a$, para todo $a \in \Sigma$:
+\[
+\begin{array}{ll}
+    & \text{P1} \leftarrow \text{P1}.a
+\end{array}
+\]
+
+\indent $p^{n,m}_j$, para todo $n,m \in \omega$ y $1 \leq j \leq n$:
+\[
+\begin{array}{ll}
+    & \text{N1} \leftarrow \text{N}\overline{j}
+\end{array}
+\]
+
+\indent $p^{n,m}_j$, para todo $n,m \in \omega$ y $n < j \leq m$:
+\[
+\begin{array}{ll}
+    & \text{P1} \leftarrow \text{P}\overline{j - n}
+\end{array}
+\]
+\vspace{2em}
+
+
+\underline{Caso inductivo.} Supongamos que la hipótesis vale para $k \in \omega$. Sea $h = M(P) \in R^{\Sigma}_{k+1}$ tal que $h: D_h \subseteq \omega^{n+1} \times {\Sigma^{*}}^{m} \rightarrow \omega$ y $P: \omega^{n} \times {\Sigma^{*}}^{m} \rightarrow \omega$ un predicado en $R^{\Sigma}_k$. Por hipótesis inductiva, $P$ es $\Sigma$-computable, entonces por 1° manantial de macros existe el macro
+\[
+\begin{array}{ll}
+    & \text{[IF P(V}\overline{n+1}\text{, V1, ..., V}\overline{n}\text{, W1, ..., W}\overline{m}\text{) GOTO A1]}
+\end{array}
+\]
+
+Así, el siguiente programa computa a $M(P)$:
+\[
+\begin{array}{ll}
+\text{L2} & \text{[IF P(N}\overline{n+1}\text{, N1, ..., N}\overline{n}\text{, P1, ..., P}\overline{m}\text{) GOTO L1]} \\
+    & \text{N}\overline{n+1} \leftarrow \text{N}\overline{n+1} + 1 \\
+    & \text{GOTO L2} \\
+\text{L1} & \text{N1} \leftarrow \text{N}\overline{n+1}
+\end{array}
+\]
+
+Esto es porque, para $(x_1, \cdots, x_n, \alpha_1, \cdots, \alpha_m) \in \omega^n \times {\Sigma^*}^m$, si el programa se detiene partiendo de $\lVert x_1, \cdots, x_n, \alpha_1, \cdots, \alpha_m \rVert$ entonces en N1 quedará guardado el primer $t$ tal que $P(t, x_1, \cdots, x_n, \alpha_1, \cdots, \alpha_m) = 1$. Si no se detiene partiendo de $\lVert x_1, \cdots, x_n, \alpha_1, \cdots, \alpha_m \rVert$ es porque no existe $t$ tal que $P(t, x_1, \cdots, x_n, \alpha_1, \cdots, \alpha_m) = 1$, lo que significa que $(x_1, \cdots, x_n, \alpha_1, \cdots, \alpha_m) \notin D_h$.
+\hfill $\blacksquare$
+
+\end{document}
