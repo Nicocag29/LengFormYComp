@@ -1,0 +1,47 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{stmaryrd}
+
+
+\title{Lenguajes Formales y Computabilidad \\
+        \large Teoremas: Combo 3 }
+
+\author{Nicolás Cagliero}
+
+\begin{document}
+\maketitle
+
+\textbf{Teorema} (Godel vence a Neumann). \textit{Si $f : D_f \subseteq \omega^n \times \Sigma^{*m} \to \Sigma^{*}$ es $\Sigma$-computable, entonces $f$ es $\Sigma$-recursiva.}
+
+\textit{Proof.} Sea $\mathcal{P}_0$ un programa que compute a $f$. Primero veremos que $f$ es $(\Sigma \cup \Sigma_p)$-recursiva. Note que
+\[
+f = E^{n,m}_{*1} \circ [T^{n,m} \circ [p^{n,m}_{1}, \ldots, p^{n,m}_{n+m}, C^{n,m}_{\mathcal{P}_0}], p^{n,m}_{1}, \ldots, p^{n,m}_{n+m}, C^{n,m}_{\mathcal{P}_0}]
+\]
+donde cabe destacar que $p^{n,m}_{1}, \ldots, p^{n,m}_{n+m}$ son las proyecciones respecto del alfabeto $\Sigma \cup \Sigma_p$, es decir que tienen dominio $\omega^n \times (\Sigma \cup \Sigma_p)^{*m}$. Esto nos dice que $f$ es $(\Sigma \cup \Sigma_p)$-recursiva. O sea que el Teorema de Independencia del Alfabeto nos dice que $f$ es $\Sigma$-recursiva.
+\hfill $\blacksquare$
+
+\vspace{1em}
+
+\textbf{Teorema} \textit{Sea $S \subseteq \omega^n \times \Sigma^{*m}$. Son equivalentes}
+\begin{enumerate}[label=(\alph*)]
+    \item $S$ es $\Sigma$-efectivamente computable
+    \item $S$ y $(\omega^n \times \Sigma^{*m}) - S$ son $\Sigma$-efectivamente enumerables
+\end{enumerate}
+
+\textit{Proof.} (b) $\Rightarrow$ (a). Si $S = \emptyset$ o $S = \omega^n \times \Sigma^{*m}$ es claro que se cumple (a). O sea que podemos suponer que ni $S$ ni $(\omega^n \times \Sigma^{*m}) - S$ son igual al conjunto vacío. Sea $\mathbb{P}_1$ un procedimiento efectivo que enumere a $S$ y sea $\mathbb{P}_2$ un procedimiento efectivo que enumere a $(\omega^n \times \Sigma^{*m}) - S$. Es fácil ver que el siguiente procedimiento computa el predicado $\chi^{\omega^n \times \Sigma^{*m}}_S$:
+
+\textbf{Etapa 1:} Darle a la variable $T$ el valor $0$.
+
+\textbf{Etapa 2:} Realizar $\mathbb{P}_1$ con el valor de $T$ como entrada para obtener de salida la tupla $(\vec{y}, \vec{\beta})$.
+
+\textbf{Etapa 3:} Realizar $\mathbb{P}_2$ con el valor de $T$ como entrada para obtener de salida la tupla $(\vec{z}, \vec{\gamma})$.
+
+\textbf{Etapa 4:} Si $(\vec{y}, \vec{\beta}) = (\vec{x}, \vec{\sigma})$, entonces detenerse y dar como dato de salida el valor $1$. Si $(\vec{z}, \vec{\gamma}) = (\vec{x}, \vec{\sigma})$, entonces detenerse y dar como dato de salida el valor $0$. Si no suceden ninguna de las dos posibilidades antes mencionadas, aumentar en $1$ el valor de la variable $T$ y dirigirse a la Etapa 2.
+\hfill $\blacksquare$
+
+
+\end{document}
