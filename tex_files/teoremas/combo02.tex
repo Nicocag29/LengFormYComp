@@ -92,7 +92,8 @@ Sea $\mathcal{P}$ el siguiente programa:
 \]
 
 donde se supone que las expansiones de los macros usan variables auxiliares que no aparecen en la lista $\text{N1}, \text{N2}, \text{P1}$ y tampoco se repiten labels auxiliares.\\
-Corroborar que se cumplan las condiciones
+Ver que se cumplan las condiciones de 2 es fácil: nuestro programa copia el comportamiento de cada componente de $F$ que ya sabemos que enumera a $S$, por lo tanto, para cada $x\in \omega$ nuestro programa termina y llega a un estado con la forma esperada y además, sabemos que para cada elemento de $S$ existe algún $x \in \omega$ que lo enumera, por lo tanto, nuestro programa se detendrá en ese $x$ llegando a un estado de la forma esperada. 
+\medskip
 
 (2) $\Rightarrow$ (1). Supongamos que $\mathcal{P} \in \text{Pro}^\Sigma$ cumple (a) y (b) de (2). Sea:
 
@@ -115,6 +116,25 @@ Definimos entonces:
 
 Nótese que cada $F_i$ es $\Sigma$-computable y tiene dominio $\omega$. Sea $F = [F_1, F_2, F_3]$. Por definición, $D_F = \omega$ y como $F_{(i)} = F_i$ para $i = 1, 2, 3$, tenemos que cada componente de $F$ es $\Sigma$-computable.
 
-Dejamos al lector verificar que $I_F = S$. \hfill $\blacksquare$
+Necesito verificar que $I_F = S$. \\
+Aclaración 1: 
+\begin{center}
+    $\mathcal{P}_1$ deja en N1 el valor que $\mathcal{P}$ deja en N1\\
+    $\mathcal{P}_2$ deja en N1 el valor que $\mathcal{P}$ deja en N2\\
+    $\mathcal{P}_3$ deja en P1 el valor que $\mathcal{P}$ deja en P1\\
+\end{center}
+Aclaración 2:
+\begin{center}
+    $\Psi_E^{1, 0, \#}(x) = $ valor que representa N1 tras correr $E$ partiendo desde el estado $\llbracket x \rrbracket$\\
+    $\Psi_E^{1, 0, *}(x) = $ valor que representa P1 tras correr $E$ partiendo desde el estado $\llbracket x \rrbracket$\\  
+\end{center}
+\bigskip
+
+($\subseteq$) Para todo $t \in \omega$, por (2a) sabemos que $P$ partiendo de $\llbracket t \rrbracket$ llega a un estado de la forma $((x, y, z, \dots), (\alpha, \beta, \dots))$ donde $(x, y, \alpha) \in S$ y como $F = [F_1, F_2, F_3]$ y teniendo en cuenta ambas aclaraciones, $F(x) = (x, y, \alpha)$\\
+\medskip
+
+($\supseteq$) Sea $(x, y, \alpha) \in S$ sabemos que $\exists t \in \omega$ tal que correr $\mathcal{P}$ partiendo del estado $\llbracket t \rrbracket$ llega a un estado de la forma $((x, y, z, \dots), (\alpha, \beta, \dots))$. Entonces, por ambas aclaraciones, $(x, y, \alpha) = (F_{(1)}(t), F_{(2)}(t), F_{(3)}(t)) = F(t)$, luego, pertenece a $I_F$
+
+\hfill $\blacksquare$
 
 \end{document}
