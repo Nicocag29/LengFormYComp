@@ -59,7 +59,7 @@ Luego, sea $\mathcal{P}_0$ = L1[ IF $AutoHalt^{\Sigma}$(P1) GOTO L1], tenemos qu
 \]
 Luego, por el teorema de caracterización de conjuntos $\Sigma$-recursivamente enumerables, que entre otras cosas dice que un conjunto es $\Sigma$-r.e. si y solo si es el dominio de alguna función $\Sigma$-recursiva, tenemos que \underline{$A$ es $\Sigma$-r.e.}
 
-Supongamos ahora que $N$ es $\Sigma$-r.e. Entonces, por el lema de restricción de funciones recursiva tenemos que $C^{0,1}_0 |_{N}$ es $\Sigma$-recursiva. Por el mismo lema, y como sabemos que $A$ es $\Sigma$-r.e., $C^{0,1}_1 |_{A}$ es $\Sigma$-recursiva. Además, notar que $A \cup N = Pro^{\Sigma}$ y $A \cap N = \emptyset$. Entonces, por el lema de división por casos de funciones $\Sigma$-recursivas, tenemos que la función
+Supongamos ahora que $N$ es $\Sigma$-r.e. Entonces, por el lema de restricción de funciones recursivas tenemos que $C^{0,1}_0 |_{N}$ es $\Sigma$-recursiva. Por el mismo lema, y como sabemos que $A$ es $\Sigma$-r.e., $C^{0,1}_1 |_{A}$ es $\Sigma$-recursiva. Además, notar que $A \cup N = Pro^{\Sigma}$ y $A \cap N = \emptyset$. Entonces, por el lema de división por casos de funciones $\Sigma$-recursivas, tenemos que la función
 \[
     AutoHalt^{\Sigma} = C^{0,1}_1 |_{A} \cup C^{0,1}_0 |_{N}
 \]
@@ -127,7 +127,7 @@ también es $\Sigma$-recursivo. Pero esto es un absurdo porque $N$ no es $\Sigma
 \vspace{2em}
 
 
-\underline{Caso inductivo.} Supongamos que la hipótesis vale para $k \in \omega$. Sea $h = M(P) \in R^{\Sigma}_{k+1}$ tal que $h: D_h \subseteq \omega^{n+1} \times {\Sigma^{*}}^{m} \rightarrow \omega$ y $P: \omega^{n} \times {\Sigma^{*}}^{m} \rightarrow \omega$ un predicado en $R^{\Sigma}_k$. Por hipótesis inductiva, $P$ es $\Sigma$-computable, entonces por 1° manantial de macros existe el macro
+\underline{Caso inductivo.} Supongamos que la hipótesis vale para $k \in \omega$. Sea $h = M(P) \in R^{\Sigma}_{k+1}$ tal que $h: D_h \subseteq \omega^{n} \times {\Sigma^{*}}^{m} \rightarrow \omega$ y $P: \omega^{n+1} \times {\Sigma^{*}}^{m} \rightarrow \omega$ un predicado en $R^{\Sigma}_k$. Por hipótesis inductiva, $P$ es $\Sigma$-computable, entonces por 1° manantial de macros existe el macro
 \[
 \begin{array}{ll}
     & \text{[IF P(V}\overline{n+1}\text{, V1, ..., V}\overline{n}\text{, W1, ..., W}\overline{m}\text{) GOTO A1]}
