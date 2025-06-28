@@ -1,0 +1,79 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{stmaryrd}
+
+
+\title{Lenguajes Formales y Computabilidad \\
+        \large Teoremas: Combo 5 }
+
+\author{Nicolás Cagliero}
+
+\begin{document}
+\maketitle
+
+\textbf{Lema.} Sea $\Sigma = \{@, \%, !\}$. Sea
+\[
+f : S_1 \times S_2 \times L_1 \times L_2 \to \omega
+\]
+con $S_1, S_2 \subseteq \omega$ y $L_1, L_2 \subseteq \Sigma^*$ conjuntos no vacíos y sea $\mathcal{G}_a$ una familia $\Sigma$-indexada de funciones tal que
+\[
+\mathcal{G}_a : \omega \times S_1 \times S_2 \times L_1 \times L_2 \times \Sigma^* \to \omega
+\]
+para cada $a \in \Sigma$. Si $f$ y cada $\mathcal{G}_a$ son $\Sigma$-efectivamente computables, entonces $R(f, \mathcal{G})$ lo es.
+
+\bigskip
+\textbf{Proof.} 
+\begin{align*}
+        &R(f, \mathcal{G}) : S_1 \times S_2 \times L_1 \times L_2 \times \Sigma^{*} \to \omega\\
+        &R(f, \mathcal{G})(\vec{x}, \vec{\alpha}, \varepsilon) = f(\vec{x}, \vec{\alpha})\\
+        &R(f, \mathcal{G})(\vec{x}, \vec{\alpha}, \alpha a) = \mathcal{G}_a(R(f, \mathcal{G})(\vec{x}, \vec{\alpha}, \alpha), \vec{x}, \vec{\alpha}, \alpha)
+\end{align*}
+
+Ahora quiero un procedimiento que compute a $R(f, \mathcal{G})$. Sean $x, y, \alpha, \beta, \gamma$ datos de entrada:
+\begin{enumerate}
+        \item Corro el procedimiento efectivo de $f$ con datos de entrada $x, y, \alpha, \beta$ y guardo el resultado en $x_0$. Hago la asignación $\sigma \leftarrow \gamma$ y la asignación $A \leftarrow \varepsilon$.
+        \item Si $\sigma \neq \varepsilon$ entonces hago la asignación $\gamma_1 \leftarrow [\sigma]_1$ y hago la asignación $\sigma \leftarrow^{\curvearrowright} \sigma$. 
+        \begin{align*}
+                &\text{Si } \gamma_1 = @ \text{ voy a 3.}\\
+                &\text{Si } \gamma_1 = \% \text{ voy a 4.}\\
+                &\text{Si } \gamma_1 = \text{ } ! \text{ voy a 5.}\\
+        \end{align*}
+        Si $\sigma = \varepsilon$, devuelvo $x_0$
+        \item Corro el procedimiento efectivo de $\mathcal{G}_@$ con datos de entrada $x_0, x, y, \alpha, \beta, A$ y guardo el resultado en $x_0$. Hago la asignación $A \leftarrow A.@$ y voy a 2.
+        \item Corro el procedimiento efectivo de $\mathcal{G}_\%$ con datos de entrada $x_0, x, y, \alpha, \beta, A$ y guardo el resultado en $x_0$. Hago la asignación $A \leftarrow A.\%$ y voy a 2.
+        \item Corro el procedimiento efectivo de $\mathcal{G}_!$ con datos de entrada $x_0, x, y, \alpha, \beta, A$ y guardo el resultado en $x_0$. Hago la asignación $A \leftarrow A.!$ y voy a 2.
+\end{enumerate}
+\bigskip
+\bigskip
+
+\textbf{Lema} (Lema de cuantificación acotada). Sea $\Sigma$ un alfabeto finito. Sea $P : S \times S_1 \times \cdots \times S_n \times L_1 \times \cdots \times L_m \to \omega$ un \textit{predicado} $\Sigma$-p.r., con $S, S_1, \dots, S_n \subseteq \omega$ y $L_1, \dots, L_m \subseteq \Sigma^*$ no vacíos. Supongamos $\overline{S} \subseteq S$ es $\Sigma$-p.r. Entonces \\ $\lambda x \vec{x} \vec{\alpha} [(\forall t \in \overline{S})_{t \leq x} P(t, \vec{x}, \vec{\alpha})]$ es $\Sigma$-p.r.
+\medskip
+
+\textbf{Proof.} Sea
+\[
+\tilde{P} = P \big|_{\overline{S} \times S_1 \times \cdots \times S_n \times L_1 \times \cdots \times L_m} \cup C_1^{1+n,m} \big|_{(\omega - \overline{S}) \times S_1 \times \cdots \times S_n \times L_1 \times \cdots \times L_m}
+\]
+
+Nótese que $\tilde{P}$ tiene dominio $\omega \times S_1 \times \cdots \times S_n \times  L_1 \times \cdots \times L_m$ y es $\Sigma$-p.r. Ya que
+\[
+\lambda x \vec{x} \vec{\alpha} [(\forall t \in \overline{S})_{t \leq x} P(t, \vec{x}, \vec{\alpha})] = \lambda x \vec{x} \vec{\alpha} \left[ \prod_{t=0}^x \tilde{P}(t, \vec{x}, \vec{\alpha}) \right]
+\]
+
+\[
+= \lambda x y \vec{x} \vec{\alpha} \left[ \prod_{t=x}^y \tilde{P}(t, \vec{x}, \vec{\alpha}) \right] \circ [C_0^{1+n,m}, p_1^{1+n,m}, \dots, p_{1+n+m}^{1+n,m}]
+\]
+
+el Lema de la sumatoria implica que $\lambda x \vec{x} \vec{\alpha} [(\forall t \in \overline{S})_{t \leq x} P(t, \vec{x}, \vec{\alpha})]$ es $\Sigma$-p.r. Ya que
+
+\[
+\lambda x \vec{x} \vec{\alpha} [(\exists t \in \overline{S})_{t \leq x} P(t, \vec{x}, \vec{\alpha})] = \neg \lambda x \vec{x} \vec{\alpha} [(\forall t \in \overline{S})_{t \leq x} \neg P(t, \vec{x}, \vec{\alpha})]
+\]
+
+tenemos que $\lambda x \vec{x} \vec{\alpha} [(\exists t \in \overline{S})_{t \leq x} P(t, \vec{x}, \vec{\alpha})]$ es $\Sigma$-p.r.
+
+
+\end{document}
