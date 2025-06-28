@@ -1,0 +1,174 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{stmaryrd}
+
+
+\title{Lenguajes Formales y Computabilidad \\
+        \large Teoremas: Combo 4 }
+
+\author{Nicolás Cagliero}
+
+\begin{document}
+\maketitle
+
+\textbf{Proposición} (Caracterización básica de conjuntos $\Sigma$-enumerables). 
+\textit{Sea $S \subseteq \omega^n \times \Sigma^{*m}$ un conjunto no vacío. Entonces son equivalentes:}
+
+\begin{enumerate}
+    \item $S$ es $\Sigma$-enumerable.
+    \item Hay un programa $\mathcal{P} \in \text{Pro}^{\Sigma}$ tal que:
+    \begin{enumerate}
+        \item \textit{Para cada $x \in \omega$, tenemos que $\mathcal{P}$ se detiene partiendo desde el estado 
+        $\llbracket x \rrbracket$ y llega a un estado de la forma $((x_1, ..., x_n, y_1, ...), (\alpha_1, ..., \alpha_m, \beta_1, ...))$, 
+        donde $(x_1, ..., x_n, \alpha_1, ..., \alpha_m) \in S$.}
+        
+        \item \textit{Para cada $(x_1, ..., x_n, \alpha_1, ..., \alpha_m) \in S$ hay un $x \in \omega$ tal que $\mathcal{P}$ 
+        se detiene partiendo desde el estado $\llbracket x \rrbracket$ y llega a un estado de la forma 
+        $((x_1, ..., x_n, y_1, ...), (\alpha_1, ..., \alpha_m, \beta_1, ...))$.}
+    \end{enumerate}
+\end{enumerate}
+
+\medskip
+
+(Hacer el caso $n = 2$ y $m = 1$)
+\medskip
+
+\textit{Proof.} (1) $\Rightarrow$ (2). Ya que $S$ es no vacío, por definición existe una función 
+\[
+F : \omega \to \omega^2 \times \Sigma^*
+\]
+tal que $I_F = S$ y cada componente $F_{(i)}$ es $\Sigma$-computable, para $i = 1, 2, 3$.
+
+Por el Primer Manantial de Macros, existen los siguientes macros:
+\[
+\begin{aligned}
+&[\text{V2} \leftarrow F_{(1)}(\text{V1})] \\
+&[\text{V2} \leftarrow F_{(2)}(\text{V1})] \\
+&[\text{W1} \leftarrow F_{(3)}(\text{V1})]
+\end{aligned}
+\]
+
+Sea $\mathcal{P}$ el siguiente programa:
+\[
+\begin{aligned}
+&[\text{P}1 \leftarrow F_{(3)}(\text{N1})] \\
+&[\text{N2} \leftarrow F_{(2)}(\text{N1})] \\
+&[\text{N1} \leftarrow F_{(1)}(\text{N1})]
+\end{aligned}
+\]
+
+donde se supone que las expansiones de los macros usan variables auxiliares que no aparecen en la lista $\text{N1}, \text{N2}, \text{P1}$ y tampoco se repiten labels auxiliares.\\
+Ver que se cumplan las condiciones de 2 es fácil: nuestro programa copia el comportamiento de cada componente de $F$ que ya sabemos que enumera a $S$, por lo tanto, para cada $x\in \omega$ nuestro programa termina y llega a un estado con la forma esperada y además, sabemos que para cada elemento de $S$ existe algún $x \in \omega$ que lo enumera, por lo tanto, nuestro programa se detendrá en ese $x$ llegando a un estado de la forma esperada. 
+\medskip
+
+(2) $\Rightarrow$ (1). Supongamos que $\mathcal{P} \in \text{Pro}^\Sigma$ cumple (a) y (b) de (2). Sea:
+
+\[
+\begin{aligned}
+&\mathcal{P}_1 = \mathcal{P} \text{N1} \leftarrow \text{N1} \\
+&\mathcal{P}_2 = \mathcal{P} \text{N1} \leftarrow \text{N2} \\
+&\mathcal{P}_3 = \mathcal{P}\text{P1} \leftarrow \text{P2}
+\end{aligned}
+\]
+
+Definimos entonces:
+\[
+\begin{aligned}
+&F_1 = \Psi^{1,0,\#}_{\mathcal{P}_1} \\
+&F_2 = \Psi^{1,0,\#}_{\mathcal{P}_2} \\
+&F_3 = \Psi^{1,0,*}_{\mathcal{P}_3}
+\end{aligned}
+\]
+
+Nótese que cada $F_i$ es $\Sigma$-computable y tiene dominio $\omega$. Sea $F = [F_1, F_2, F_3]$. Por definición, $D_F = \omega$ y como $F_{(i)} = F_i$ para $i = 1, 2, 3$, tenemos que cada componente de $F$ es $\Sigma$-computable.
+
+Necesito verificar que $I_F = S$. \\
+Aclaración 1: 
+\begin{center}
+    $\mathcal{P}_1$ deja en N1 el valor que $\mathcal{P}$ deja en N1\\
+    $\mathcal{P}_2$ deja en N1 el valor que $\mathcal{P}$ deja en N2\\
+    $\mathcal{P}_3$ deja en P1 el valor que $\mathcal{P}$ deja en P1\\
+\end{center}
+Aclaración 2:
+\begin{center}
+    $\Psi_E^{1, 0, \#}(x) = $ valor que representa N1 tras correr $E$ partiendo desde el estado $\llbracket x \rrbracket$\\
+    $\Psi_E^{1, 0, *}(x) = $ valor que representa P1 tras correr $E$ partiendo desde el estado $\llbracket x \rrbracket$\\  
+\end{center}
+\bigskip
+
+($\subseteq$) Para todo $t \in \omega$, por (2a) sabemos que $P$ partiendo de $\llbracket t \rrbracket$ llega a un estado de la forma $((x, y, z, \dots), (\alpha, \beta, \dots))$ donde $(x, y, \alpha) \in S$ y como $F = [F_1, F_2, F_3]$ y teniendo en cuenta ambas aclaraciones, $F(x) = (x, y, \alpha)$\\
+\medskip
+
+($\supseteq$) Sea $(x, y, \alpha) \in S$ sabemos que $\exists t \in \omega$ tal que correr $\mathcal{P}$ partiendo del estado $\llbracket t \rrbracket$ llega a un estado de la forma $((x, y, z, \dots), (\alpha, \beta, \dots))$. Entonces, por ambas aclaraciones, $(x, y, \alpha) = (F_{(1)}(t), F_{(2)}(t), F_{(3)}(t)) = F(t)$, luego, pertenece a $I_F$
+
+\hfill $\blacksquare$
+
+\bigskip
+\bigskip
+\bigskip
+
+\textbf{Lemma 2} (Lema de la sumatoria). \textit{Sea $\Sigma$ un alfabeto finito. Si 
+$f : \omega \times S_1 \times \cdots \times S_n \times L_1 \times \cdots \times L_m \to \omega$ 
+es $\Sigma$-p.r., con $S_1, \ldots, S_n \subseteq \omega$ y $L_1, \ldots, L_m \subseteq \Sigma^*$ no vacíos, entonces la función
+\[
+\lambda x y \vec{x} \vec{\alpha} \left[\sum_{t=x}^{y} f(t, \vec{x}, \vec{\alpha})\right]
+\]
+es $\Sigma$-p.r.}
+\bigskip
+
+\textit{Proof.} Sea 
+\[
+G = \lambda t x \vec{x} \vec{\alpha} \left[\sum_{i=x}^{t} f(i, \vec{x}, \vec{\alpha}) \right]
+\]
+Ya que
+\[
+\lambda x y \vec{x} \vec{\alpha} \left[\sum_{i=x}^{y} f(i, \vec{x}, \vec{\alpha}) \right] 
+= G \circ \left[p_2^{n+2,m}, p_1^{n+2,m}, p_3^{n+2,m}, \ldots, p_{n+m+2}^{n+2,m} \right]
+\]
+basta con probar que $G$ es $\Sigma$-p.r. Primero note que
+\[
+G(0, x, \vec{x}, \vec{\alpha}) = 
+\begin{cases}
+0 & \text{si } x > 0 \\
+f(0, \vec{x}, \vec{\alpha}) & \text{si } x = 0
+\end{cases}
+\]
+\[
+G(t+1, x, \vec{x}, \vec{\alpha}) = 
+\begin{cases}
+0 & \text{si } x > t + 1 \\
+G(t, x, \vec{x}, \vec{\alpha}) + f(t + 1, \vec{x}, \vec{\alpha}) & \text{si } x \leq t + 1
+\end{cases}
+\]
+
+O sea que si definimos $h$ y $g$ apropiadamente, tenemos que $G = R(h, g)$. Definamos $h$ y $g$ y definamos los conjuntos $D_1, D_2, H_1, H_2$ basados en las condiciones de los casos.\\
+\begin{align*}
+    &D_1 = \{(x, \vec{x}, \vec{\alpha}) \in \omega \times S_1 \times \dots \times S_n \times L_1 \times \dots \times L_m : x > 0 \}\\
+    &D_2 = \{(x, \vec{x}, \vec{\alpha}) \in \omega \times S_1 \times \dots \times S_n \times L_1 \times \dots \times L_m : x = 0 \}\\
+    &H_1 = \{(z, t, x, \vec{x}, \vec{\alpha}) \in \omega^3 \times S_1 \times \dots \times S_n \times L_1 \times \dots \times L_m : x > t + 1 \}\\
+    &H_2 = \{(z, t, x, \vec{x}, \vec{\alpha}) \in \omega^3 \times S_1 \times \dots \times S_n \times L_1 \times \dots \times L_m : x \leq t + 1 \}\\
+\end{align*}
+
+Ahora, $h$ y $g$ correspondientes:
+\[
+h = C_0^{n+1,m} \big|_{D_1} \cup \lambda x \vec{x} \vec{\alpha} \left[ f(0, \vec{x}, \vec{\alpha}) \right] \big|_{D_2}
+\]
+
+\[
+g = C_0^{n+3,m} \big|_{H_1} \cup \lambda A t x \vec{x} \vec{\alpha} \left[A + f(t+1, \vec{x}, \vec{\alpha}) \right] \big|_{H_2}
+\]
+
+Ya que $f$ es $\Sigma$-p.r. y las funciones $\lambda x \vec{x} \vec{\alpha} \left[f(0, \vec{x}, \vec{\alpha}) \right]$ 
+y $\lambda A t x \vec{x} \vec{\alpha} \left[A + f(t+1, \vec{x}, \vec{\alpha}) \right]$ se pueden escribir como composición 
+de funciones $\Sigma$-p.r., estas también son $\Sigma$-p.r. Solo falta ver que los conjuntos $D_1, D_2, H_1, H_2$ son $\Sigma$-p.r. 
+Veamos por ejemplo que $H_1$ es $\Sigma$-pr. Ya que $f$ es $\Sigma$-p.r., su dominio $D_f = \omega \times S_1 \times \cdots \times S_n \times L_1 \times \dots \times L_m$ es $\Sigma$-p.r., 
+lo que implica que $S_i$ y $L_j$ son $\Sigma$-p.r. Por lo tanto, el conjunto 
+$R = \omega^3 \times S_1 \times \cdots \times L_m$ es $\Sigma$-p.r. 
+Nótese que $\chi_{H_1}^{\omega^{3+n} \times \Sigma^{*m}} = (\chi_{R}^{\omega^{3+n} \times \Sigma^{*m}} \wedge \lambda z t x \vec{x} \vec{\alpha} [x > t+1])$, y como es la conjunción de dos predicados $\Sigma$-p.r., es $\Sigma$-p.r. \hfill $\blacksquare$
+
+
+\end{document}
