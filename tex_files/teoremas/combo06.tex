@@ -1,0 +1,129 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{stmaryrd}
+
+
+\title{Lenguajes Formales y Computabilidad \\
+        \large Teoremas: Combo 6 }
+
+\author{Nicolás Cagliero}
+
+\begin{document}
+\maketitle
+
+\textbf{Lema} \textit{Si $S \subseteq \omega^n \times \Sigma^{*m}$ es $\Sigma$-efectivamente computable entonces $S$ es $\Sigma$-efectivamente enumerable.}
+\bigskip
+
+\textbf{Proof.} Supongamos $S \neq \emptyset$. Sea $(\vec{z}, \vec{\gamma}) \in S$ fijo. Sea $\mathbb{P}$ un procedimiento efectivo que computa a $\chi_S^{\omega^n \times \Sigma^{*m}}$. Sea $\mathbb{P}_1$ un procedimiento efectivo que enumera a $\omega^n \times \Sigma^{*m}$. Entonces el siguiente procedimiento enumera a $S$:
+\medskip
+
+\textbf{Etapa 1:} Realizar $\mathbb{P}_1$ con $x \in \omega$ de entrada para obtener $(\vec{x}, \vec{\alpha}) \in \omega^n \times \Sigma^{*m}$.
+
+\textbf{Etapa 2:} Realizar $\mathbb{P}$ con $(\vec{x}, \vec{\alpha})$ de entrada para obtener el valor Booleano $e$ de salida.
+
+\textbf{Etapa 3:} Si $e = 1$ dar como dato de salida $(\vec{x}, \vec{\alpha})$. Si $e = 0$ dar como dato de salida $(\vec{z}, \vec{\gamma})$.
+\bigskip
+\bigskip
+
+\textbf{Teorema} (Caracterización de conjuntos $\Sigma$-r.e.). \textit{Dado $S \subseteq \omega^n \times \Sigma^{*m}$, son equivalentes:}
+
+\begin{enumerate}
+    \item $S$ es $\Sigma$-recursivamente enumerable.
+    \item $S = I_F$, para alguna $F : D_F \subseteq \omega^k \times \Sigma^{*l} \to \omega^n \times \Sigma^{*m}$ tal que cada $F_{(i)}$ es $\Sigma$-recursiva.
+    \item $S = D_f$, para alguna función $\Sigma$-recursiva $f$.
+\end{enumerate}
+
+\textbf{Proof.} (2) $\Rightarrow$ (3). Haremos el caso \( k = l = 1 \) y \( n = m = 2 \). El caso general es completamente análogo. Nótese que entonces tenemos que 
+
+\begin{center}
+    $S \subseteq \omega^2 \times \Sigma^{*2} \text{ y } F : D_F \subseteq \omega \times \Sigma^* \to \omega^2 \times \Sigma^{*2} \text{ es tal que } 
+    I_F = S \text{ y } F_{(1)}, F_{(2)}, F_{(3)}, F_{(4)} \text{ son } \Sigma\text{-recursivas.} 
+    $
+\end{center}
+
+Para cada \( i \in \{1,2,3,4\} \), sea \( \mathcal{P}_i \) un programa el cual computa a \( F_{(i)} \). Sea \( \leq \) un orden total sobre \( \Sigma \). Definamos
+\[
+H_i = \lambda t x_1 \alpha_1 \left[\neg Halt^{1,1}(t, x_1, \alpha_1, \mathcal{P}_i)\right]
+\]
+Notar que \( D_{H_i} = \omega^2 \times \Sigma^* \) y que \( H_i \) es \( \Sigma \)-mixta. Además sabemos que la función \( Halt^{1,1} \) es \( (\Sigma \cup \Sigma_p) \)-p.r. por lo cual resulta fácilmente que \( H_i \) es \( (\Sigma \cup \Sigma_p) \)-p.r. Por la Proposición de Independencia del Alfabeto tenemos que \( H_i \) es \( \Sigma \)-p.r., lo cual por el Segundo Manantial nos dice que hay un macro:
+
+\[
+[\text{IF } H_i(\text{V2}, \text{V1}, \text{W1}) \text{ GOTO A1}]
+\]
+
+Para hacer más intuitivo el uso de este macro lo escribiremos de la siguiente manera:
+
+\[
+[\text{IF } \neg Halt^{1,1}(\text{V2}, \text{V1}, \text{W1}, \mathcal{P}_i) \text{ GOTO A1}]
+\]
+
+Para \( i = 1, 2 \), definamos
+\[
+E_i = \lambda x t x_1 \alpha_1 \left[ x \neq E^{1,1}_{\#1}(t, x_1, \alpha_1, \mathcal{P}_i) \right]
+\]
+
+Para \( i = 3, 4 \), definamos
+\[
+E_i = \lambda t x_1 \alpha_1 \alpha \left[ \alpha \neq E^{1,1}_{\ast1}(t, x_1, \alpha_1, \mathcal{P}_i) \right]
+\]
+
+Con el mismo análisis que hicimos para $H_i$ llegamos a que cada $E_i$ es $\Sigma$-pr. O sea que para cada \( i \in \{1,2\} \) hay un macro
+\[
+[\text{IF } E_i(\text{V2}, \text{V3}, \text{V1}, \text{W1}) \text{ GOTO A1}]
+\]
+
+y para cada \( i \in \{3,4\} \) hay un macro
+\[
+[\text{IF } E_i(\text{V2}, \text{V1}, \text{W1}, \text{W2}) \text{ GOTO A1}]
+\]
+
+Haremos más intuitiva la forma de escribir estos macros, por ejemplo para \( i = 1 \), lo escribiremos de la siguiente manera
+
+\[
+[\text{IF V2 } \neq E^{1,1}_{\#1}(\text{V3}, \text{V1}, \text{W1}, \mathcal{P}_1) \text{ GOTO A1}]
+\]
+
+Ya que la función \( f = \lambda x[(x)_1] \) es \( \Sigma \)-p.r. hay un macro
+\[
+[\text{V2} \leftarrow f(\text{V1})]
+\]
+el cual escribiremos de la siguiente manera:
+\[
+[\text{V2} \leftarrow (\text{V1})_1]
+\]
+
+Similarmente hay macros:
+\[
+[\text{W1} \leftarrow *^{\leq}(\text{V1})_3]
+\]
+\[
+[\text{V2} \leftarrow (\text{V1})_2]
+\]
+
+\bigskip
+
+Sea \( \mathcal{P} \) el siguiente programa de \( \mathcal{S}^\Sigma \):
+
+\begin{alignat*}{2}
+\text{L1} \quad & \text{N20} \leftarrow \text{N20} + 1 \\
+& [\text{N10} \leftarrow (\text{N20})_1] \\
+& [\text{N3} \leftarrow (\text{N20})_2] \\
+& [\text{P3} \leftarrow *^{\leq}(\text{N20})_3] \\
+& [\text{IF } \neg Halt^{1,1}(\text{N10}, \text{N3}, \text{P3}, \mathcal{P}_1) \text{ GOTO L1}] \\
+& [\text{IF } \neg Halt^{1,1}(\text{N10}, \text{N3}, \text{P3}, \mathcal{P}_2) \text{ GOTO L1}] \\
+& [\text{IF } \neg Halt^{1,1}(\text{N10}, \text{N3}, \text{P3}, \mathcal{P}_3) \text{ GOTO L1}] \\
+& [\text{IF } \neg Halt^{1,1}(\text{N10}, \text{N3}, \text{P3}, \mathcal{P}_4) \text{ GOTO L1}] \\
+& [\text{IF N1} \neq E^{1,1}_{\#1}(\text{N10}, \text{N3}, \text{P3}, \mathcal{P}_1) \text{ GOTO L1}] \\
+& [\text{IF N2} \neq E^{1,1}_{\#1}(\text{N10}, \text{N3}, \text{P3}, \mathcal{P}_2) \text{ GOTO L1}] \\
+& [\text{IF P1} \neq E^{1,1}_{\ast1}(\text{N10}, \text{N3}, \text{P3}, \mathcal{P}_3) \text{ GOTO L1}] \\
+& [\text{IF P2} \neq E^{1,1}_{\ast1}(\text{N10}, \text{N3}, \text{P3}, \mathcal{P}_4) \text{ GOTO L1}]
+\end{alignat*}
+
+
+Es claro que este programa computa una proyección, no modifica ni N1 ni P1 así que computa tanto a $p_1^{2,2}$ como a $p_3^{2,2}$. Además, podemos notar que el programa no termina si los valores representados en N1, N2, P1 y P2 no pertenecen a $S$ pues nunca van a cumplirse las 4 comparaciones pues las $F_{(i)}$ no enumeran a esos valores. Entonces, el programa computa $p_1^{2,2}|_S$. Entonces \( p^{2,2}_1|_S \) es \( \Sigma \)-computable por lo cual es \( \Sigma \)-recursiva, lo cual prueba (3) ya que \( D_{(p^{2,2}_1|_S)} = S \).
+ 
+\end{document}
