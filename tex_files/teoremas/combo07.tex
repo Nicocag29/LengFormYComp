@@ -1,0 +1,126 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{stmaryrd}
+
+
+\title{Lenguajes Formales y Computabilidad \\
+        \large Teoremas: Combo 7 }
+
+\author{Nicolás Cagliero}
+
+\begin{document}
+\maketitle
+
+\textbf{Lema} (Lema de la minimización acotada). Sean \( n, m \geq 0 \). Sea 
+\[
+P : D_P \subseteq \omega \times \omega^n \times \Sigma^m \to \omega
+\]
+un predicado \( \Sigma \)-p.r. Entonces:
+
+\begin{itemize}
+    \item[(a)] \( M(P) \) es \( \Sigma \)-recursiva.
+    \item[(b)] Si hay una función \( \Sigma \)-p.r. \( f : \omega^n \times \Sigma^m \to \omega \) tal que 
+    \[
+    M(P)(\vec{x}, \vec{\alpha}) = \text{min}_t P(t, \vec{x}, \vec{\alpha}) \leq f(\vec{x}, \vec{\alpha}), \quad \text{para cada } (\vec{x}, \vec{\alpha}) \in D_{M(P)},
+    \]
+    entonces \( M(P) \) es \( \Sigma \)-p.r.
+\end{itemize}
+
+\textbf{Dem} (a) Sea \( \widetilde{P} = P \cup C^{n+1,m}_0|_{[\omega^{n+1} \times \Sigma^{*m}] - D_P} \). Note que \( \widetilde{P} \) es \( \Sigma \)-p.r.. Veremos a continuación que \( M(P) = M(\widetilde{P}) \). Nótese que
+\[
+\{t \in \omega : P(t, \vec{x}, \vec{\alpha}) = 1\} = \{t \in \omega : \widetilde{P}(t, \vec{x}, \vec{\alpha}) = 1\}
+\]
+Esto claramente dice que \( D_{M(P)} = D_{M(\widetilde{P})} \) y que \( M(P)(\vec{x}, \vec{\alpha}) = M(\widetilde{P})(\vec{x}, \vec{\alpha}) \), para cada \( (\vec{x}, \vec{\alpha}) \in D_{M(P)} \), por lo cual \( M(P) = M(\widetilde{P}) \). Veremos entonces que \( M(\widetilde{P}) \) es \( \Sigma \)-recursiva. Sea \( k \) tal que \( \widetilde{P} \in PR^{\Sigma}_k \). Ya que \( \widetilde{P} \) es \( \Sigma \)-total y \( \widetilde{P} \in PR^{\Sigma}_k \subseteq R^{\Sigma}_k \), tenemos que \( M(\widetilde{P}) \in R^{\Sigma}_{k+1} \) y por lo tanto \( M(P) \in R^{\Sigma} \).
+
+(b) Ya que \( M(P) = M(\widetilde{P}) \), basta con probar que \( M(\widetilde{P}) \) es \( \Sigma \)-p.r. Primero veremos que \( D_{M(\widetilde{P})} \) es un conjunto \( \Sigma \)-p.r. Nótese que
+\[
+\chi^{\omega^n \times \Sigma^m}_{D_{M(\widetilde{P})}} = \lambda \vec{x} \vec{\alpha} \left( [\exists t \in \omega]_{t \leq f(\vec{x}, \vec{\alpha})} \text{ } \widetilde{P}(t, \vec{x}, \vec{\alpha}) \right)
+\]
+lo cual nos dice que 
+\[
+\chi^{\omega^n \times \Sigma^m}_{D_{M(\widetilde{P})}} = \lambda x \vec{x} \vec{\alpha} \left( (\exists t \in \omega)_{t \leq x} \text{ } \widetilde{P}(t, \vec{x}, \vec{\alpha}) \right) \circ [f, p^{n, m}_1, \ldots, p^{n, m}_{n+m}]
+\]
+
+Pero el Lema de Cuantificación Acotada nos dice que \( \lambda x \vec{x} \vec{\alpha} \left[ (\exists t \in \omega)_{t \leq x} \text{ } \widetilde{P}(t, \vec{x}, \vec{\alpha}) \right] \) es \( \Sigma \)-p.r., por lo cual \( \chi^{\omega^n \times \Sigma^m}_{D_{M(\widetilde{P})}} \) lo es.
+
+Sea
+\[
+P_1 = \lambda t \vec{x} \vec{\alpha} \left( \widetilde{P}(t, \vec{x}, \vec{\alpha}) \wedge (\forall j \in \omega)_{j \leq t} \text{ } j = t \vee \neg \widetilde{P}(j, \vec{x}, \vec{\alpha}) \right)
+\]
+
+Note que \( P_1 \) es \( \Sigma \)-total y \( \Sigma \)-p.r. Además, para \( (\vec{x}, \vec{\alpha}) \in \omega^n \times \Sigma^{*m} \) se tiene que \( P_1(t, \vec{x}, \vec{\alpha}) = 1 \) si y solo si \( (\vec{x}, \vec{\alpha}) \in D_{M(\widetilde{P})} \) y \( t = M(\widetilde{P})(\vec{x}, \vec{\alpha}) \). Esto nos dice que
+
+\[
+M(\widetilde{P}) = \left( \lambda \vec{x} \vec{\alpha} \left[  \prod_{t=0}^{f(\vec{x}, \vec{\alpha})} t^{P_1(t, \vec{x}, \vec{\alpha})} \right] \right) |_{D_{M(\widetilde{P})}}
+\]
+
+Solo resta probar que 
+\[
+F = \lambda \vec{x} \vec{\alpha} \left[  \prod_{t=0}^{f(\vec{x}, \vec{\alpha})} t^{P_1(t, \vec{x}, \vec{\alpha})} \right]
+\]
+lo es. Pero
+
+\[
+F = \lambda x y \vec{x} \vec{\alpha} \left[ \prod_{t=x}^{y} t^{P_1(t,\vec{x},\vec{\alpha})} \right] \circ [C^{n, m}_0, f, p^{n, m}_1, \ldots, p^{n, m}_{n+m}]
+\]
+
+y por el Lema de la Sumatoria, \( F \) es \( \Sigma \)-p.r. \hfill $\blacksquare$
+
+
+\bigskip
+\bigskip
+
+
+\textbf{Lema} Supongamos $f : D_f \subseteq \omega^n \times \Sigma^{*m} \to O$ es $\Sigma$-recursiva y $S \subseteq D_f$ es $\Sigma$-r.e., entonces $f|_S$ es $\Sigma$-recursiva.
+\bigskip
+
+
+\textbf{Dem} Haremos el caso $n = m = 1$ y $O = \Sigma^*$. Tenemos que hay una función $F : \omega \to \omega \times \Sigma^*$ tal que $\text{Im}\, F = S$ y $F_{(1)}, F_{(2)}$ son $\Sigma$-recursivas. Por el Primer Manantial en $\mathcal{S}^\Sigma$ hay macros
+\[
+\begin{aligned}
+&\text{[W2} \leftarrow f(\text{V1}, \text{W1})] \\
+&\text{[V2} \leftarrow F_{(1)}(\text{V1})] \\
+&\text{[W1} \leftarrow F_{(2)}(\text{V1})]
+\end{aligned}
+\]
+
+Ya que los predicados $D = \lambda xy[x \neq y]$ y $D' = \lambda \alpha \beta[\alpha \neq \beta]$ son $\Sigma$-p.r., en $\mathcal{S}^\Sigma$ hay macros
+
+\[
+\begin{aligned}
+&\text{[IF } D(\text{V1}, \text{V2}) \text{ GOTO A1]} \\
+&\text{[IF } D'(\text{W1}, \text{W2}) \text{ GOTO A1]}
+\end{aligned}
+\]
+
+Para hacer más amigable la lectura los escribiremos de la siguiente manera
+\[
+\begin{aligned}
+&\text{[IF V1} \neq \text{V2 GOTO A1]} \\
+&\text{[IF W1} \neq \text{W2 GOTO A1]}
+\end{aligned}
+\]
+
+Sea $\mathcal{P}$ el siguiente programa:
+\[
+\begin{aligned}
+\text{L2} &\quad [\text{N2} \leftarrow F_{(1)}(\text{N20})] \\
+     &\quad [\text{P2} \leftarrow F_{(2)}(\text{N20})] \\
+     &\quad [\text{IF N1} \neq \text{N2 GOTO L1}] \\
+     &\quad [\text{IF P1} \neq \text{P2 GOTO L1}] \\
+     &\quad [\text{P1} \leftarrow f(\text{N1}, \text{P1})] \\
+     &\quad \text{GOTO L3} \\
+\text{L1} &\quad \text{N20} \leftarrow \text{N20} + 1 \\
+     &\quad \text{GOTO L2} \\
+\text{L3} &\quad \text{SKIP}
+\end{aligned}
+\]
+
+Es fácil ver que $\mathcal{P}$ computa a $f|_S$ \hfill $\blacksquare$
+
+
+\end{document}
