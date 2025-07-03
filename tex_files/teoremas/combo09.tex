@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{amsmath, amssymb}
+\usepackage{mathrsfs}
+\usepackage{enumitem}
+\usepackage{stmaryrd}
+
+
+\title{Lenguajes Formales y Computabilidad \\
+        \large Teoremas: Combo 9 }
+
+\author{Nicolás Cagliero}
+
+\begin{document}
+\maketitle
+
+\textbf{Lema} (Lema de división por casos para funciones $\Sigma$-recursivas). \\Supongamos $f_i : D_{f_i} \subseteq \omega^n \times \Sigma^{*m} \to O$, $i = 1, \ldots, k$, son funciones $\Sigma$-recursivas tales que $D_{f_i} \cap D_{f_j} = \emptyset$ para $i \neq j$. Entonces la función $f_1 \cup \ldots \cup f_k$ es $\Sigma$-recursiva.
+    (Haga el caso $k = 2$, $n = m = 1$ y $O = \omega$)
+
+\bigskip
+\textbf{Dem} 
+Sean $\mathcal{P}_1$ y $\mathcal{P}_2$ programas que computen las funciones $f_1$ y $f_2$, respectivamente. Para $i = 1,2$, definamos
+
+\[
+H_i = \lambda tx_1\alpha_1 \left[ Halt^{1,1}(t, x_1, \alpha_1, \mathcal{P}_i) \right]
+\]
+
+Notar que $D_{H_i} = \omega^2 \times \Sigma^*$ y que $H_i$ es $\Sigma$-mixta. Además sabemos que la función  
+$Halt^{1,1}$ es $(\Sigma \cup \Sigma_p)$-p.r., por lo cual resulta fácilmente que $H_i$ es $(\Sigma \cup \Sigma_p)$-p.r..  
+Por el Teorema de Independencia del Alfabeto tenemos que $H_i$ es $\Sigma$-p.r.. y por lo tanto  
+el Segundo Manantial de Macros nos dice que en $\mathcal{S}^{\Sigma}$ hay un macro:
+
+\[
+[ \text{IF } H_i(\text{V1}, \text{V2}, \text{W1}) \text{ GOTO A1} ]
+\]
+
+Para hacer más intuitivo el uso de este macro lo escribiremos de la siguiente manera:
+
+\[
+[ \text{IF } Halt^{1,1}(\text{V1}, \text{V2}, \text{W1}, \mathcal{P}_i) \text{ GOTO A1} ]
+\]
+
+Ya que cada $f_i$ es $\Sigma$-recursiva, el Primer Manantial nos dice que en $\mathcal{S}^{\Sigma}$ hay macros
+
+\[
+[ \text{V2} \leftarrow f_1(\text{V1}, \text{W1}) ]
+\]
+\[
+[ \text{V2} \leftarrow f_2(\text{V1}, \text{W1}) ]
+\]
+
+Sea $\mathcal{P}$ el siguiente programa:
+
+\begin{align*}
+\text{L1} \quad & \text{N20} \leftarrow \text{N20} + 1 \\
+                & [\text{IF } Halt^{1,1}(\text{N20}, \text{N1}, \text{P1}, \mathcal{P}_1) \text{ GOTO L2}] \\
+                & [\text{IF } Halt^{1,1}(\text{N20}, \text{N1}, \text{P1}, \mathcal{P}_2) \text{ GOTO L3}] \\
+                & \text{GOTO L1} \\
+\text{L2} \quad & [\text{N1} \leftarrow f_1(\text{N1}, \text{P1})] \\
+                & \text{GOTO L4} \\
+\text{L3} \quad & [\text{N1} \leftarrow f_2(\text{N1}, \text{P1})] \\
+\text{L4} \quad & \text{SKIP}
+\end{align*}
+
+Nótese que $\mathcal{P}$ computa la función $f_1 \cup f_2$ pues primero nos fijamos que el contenido en N1 y P1 sea parte del dominio de algunas de las dos funciones. En caso que no sea de ninguno de los dominios, el programa no termina. Cuando vemos que en efecto pertenece a alguno de los dos dominios, dejamos en N1 el valor correspondiente al resultado de aplicar $f_i$ con esos valores. \hfill $\blacksquare$
+
+
+
+\bigskip
+\bigskip
+
+\textbf{Teorema} (Gödel vence a Neumann). \textit{Si $f : D_f \subseteq \omega^n \times \Sigma^{*m} \to \omega$ es $\Sigma$-computable, entonces $f$ es $\Sigma$-recursiva.}
+\bigskip
+
+\textbf{Dem} Sea $\mathcal{P}_0$ un programa que compute a $f$. Primero veremos que $f$ es $(\Sigma \cup \Sigma_p)$-recursiva. Note que
+\[
+f = E^{n,m}_{\#1} \circ [T^{n,m} \circ [p^{n,m}_{1}, \ldots, p^{n,m}_{n+m}, C^{n,m}_{\mathcal{P}_0}], p^{n,m}_{1}, \ldots, p^{n,m}_{n+m}, C^{n,m}_{\mathcal{P}_0}]
+\]
+donde cabe destacar que $p^{n,m}_{1}, \ldots, p^{n,m}_{n+m}$ son las proyecciones respecto del alfabeto $\Sigma \cup \Sigma_p$, es decir que tienen dominio $\omega^n \times (\Sigma \cup \Sigma_p)^{*m}$. Esto nos dice que $f$ es $(\Sigma \cup \Sigma_p)$-recursiva. O sea que el Teorema de Independencia del Alfabeto nos dice que $f$ es $\Sigma$-recursiva.
+\hfill $\blacksquare$
+
+
+\end{document}
